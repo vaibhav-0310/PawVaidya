@@ -21,9 +21,7 @@ router.post("/signup", async (req, res) => {
       state,
       district,
     });
-    const { otp } = req.body;
-    console.log(otp);
-    console.log(o);
+    const { otp } = req.body; 
     if (o == otp) {
       User.register(newUser, password);
       res.status(200).json({
@@ -41,7 +39,6 @@ router.post("/signup", async (req, res) => {
 
 router.post("/send-otp", async(req, res) => {
   o = Math.floor(Math.random() * 1000000);
-  console.log("Generated OTP:", o);
   const transporter = nodemailer.createTransport({
     service:"gmail",
     auth: {
@@ -50,7 +47,6 @@ router.post("/send-otp", async(req, res) => {
     },
   });
   const to=req.body.email;
-  console.log(req.body.email);
    const info = await transporter.sendMail({
     from: '"PawVaidya" <vbhargav0310@gmail.com>',
     to,
@@ -58,5 +54,21 @@ router.post("/send-otp", async(req, res) => {
     text: `OTP for Successful login is ${o}`, 
   });
   res.status(200).json({ message: "OTP sent", otp: o });
+});
+
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) return res.status(500).json({ error: err.message });
+    if (!user) return res.status(400).json({ error: "Invalid credentials" });
+
+    req.logIn(user, (err) => {
+      if (err) return res.status(500).json({ error: err.message });
+      console.log(req.body);
+      return res.json({
+        message: "Login successful",
+        userId: user._id.toString(),
+      });
+    });
+  })(req, res, next);
 });
 export default router;

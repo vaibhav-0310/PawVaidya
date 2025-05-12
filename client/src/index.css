@@ -1,7 +1,16 @@
-.input-signup{
-    padding: 8px;
-    padding-left: 20px;
-    border: none;
-    width: 80%;
-    border-radius: 20px;
+.input-signup {
+  padding: 8px;
+  padding-left: 20px;
+  border: none;
+  width: 80%;
+  border-radius: 20px;
+}
+.signup-button {
+  background-color: "#9e9284";
+  color: "white";
+  border: "none";
+  padding: "10px 20px";
+  border-radius: "5px";
+  font-weight: "bold";
+  cursor: "pointer";
 }

@@ -22,7 +22,9 @@ function Signup() {
   const handleSendOtp = async (e) => {
     e.preventDefault();
     try {
-      const re = await axios.post("http://localhost:8080/send-otp", {email:form.email});
+      const re = await axios.post("http://localhost:8080/send-otp", {
+        email: form.email,
+      });
       setOtpSent(true);
       alert("OTP sent to your email");
     } catch (err) {
@@ -57,7 +59,48 @@ function Signup() {
           <div style={{ textAlign: "left" }}>
             <img src={logo} alt="logo" style={{ height: "100px" }} />
           </div>
-          <img src={image} alt="Signup" style={{ height: "80%" }} />
+          <div className="row">
+            <div className="col-11" style={{ height: "80vh" }}>
+              <img src={image} alt="Signup" style={{ height: "100%" }} />
+            </div>
+            <div className="button col-1" style={{ textAlign: "right" }}>
+              <button
+                className="signup-button"
+                style={{
+                  backgroundColor: "#9e9284",
+                  color: "white",
+                  border: "none",
+                  padding: "14px 20px 14px 14px",
+                  fontSize: "18px", 
+                  borderRadius: "10px",
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+                  
+                }}
+              >
+                Signup
+              </button>
+              <br></br>
+              <br></br>
+              <button
+                className="login-button"
+                style={{
+                  backgroundColor: "#d7cfc2",
+                  border: "none",
+                  padding: "10px 20px",
+                  borderRadius: "10px",
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                  color:"#9e9284",
+                  
+                }}
+                onClick={() => (window.location.href = "/login")}
+              >
+                Login
+              </button>
+            </div>
+          </div>
         </div>
         <div
           className="col-4"
@@ -77,7 +120,7 @@ function Signup() {
 
             <form
               onSubmit={otpSent ? handleSubmit : handleSendOtp}
-              style={{ textAlign: "center" }}
+              style={{ textAlign: "right" }}
             >
               <input
                 className="input-signup"
@@ -133,6 +176,10 @@ function Signup() {
                   <br />
                 </>
               )}
+              <input type="checkbox" required />&nbsp;
+              I fully accept the terms and conditions
+              <br />
+              <br />
               <button
                 className="btn"
                 style={{ background: "#3A9D9B" }}
