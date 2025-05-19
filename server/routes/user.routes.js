@@ -31,7 +31,7 @@ router.post("/signup", async (req, res) => {
     } else {
       res.status(200).json({ message: "Invalid OTP" });
     }
-  } catch (e) {
+  } catch(e) {
     res.status(400).json({ message: "user creation failed" });
     console.log(e);
   }
@@ -63,7 +63,6 @@ router.post("/login", (req, res, next) => {
 
     req.logIn(user, (err) => {
       if (err) return res.status(500).json({ error: err.message });
-      console.log(req.body);
       return res.json({
         message: "Login successful",
         userId: user._id.toString(),
