@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import image from "../assests/image.svg";
-import logo from "../assests/logo.svg";
+import image from "../../assests/image.svg";
+import logo from "../../assests/logo.svg";
 import axios from "axios";
 
 function Signup() {

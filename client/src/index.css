@@ -1,3 +1,10 @@
+body {
+  background-color: #f2f2f2 !important;
+  font-family: Urbanist !important;
+}
+
+/* signup */
+
 .input-signup {
   padding: 8px;
   padding-left: 20px;
@@ -13,4 +20,74 @@
   border-radius: "5px";
   font-weight: "bold";
   cursor: "pointer";
+}
+
+/* navbar */
+
+.navbar-all {
+  margin: 10px 20px 0px 20px;
+  background-color: #fff !important;
+  border-radius: 100px;
+  height: 70px;
+  padding: 0px 40px 0px 40px;
+}
+
+.but-1 {
+  border-radius: 50px !important;
+  width: 125px;
+}
+.paw {
+  height: 100px;
+  width: 150px;
+}
+
+.nav-link {
+  margin-right: 10px;
+}
+
+/* home page */
+
+.hero-img {
+  height: 600px;
+  width: 100%;
+  border-radius: 50px;
+}
+.hero {
+  margin-top: 40px !important;
+  height: 500px !important;
+}
+.hero-left {
+  padding-top: 100px;
+}
+.back {
+  background-image: url("https://cdn.prod.website-files.com/67607a4da94c236117377bec/6764819726da5b0ff20bf33d_arrow-pink.webp");
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  background-size: 85%;
+  padding-bottom: 0.5rem;
+  position: relative;
+}
+.but-2{
+  padding: 10px 20px 10px 20px !important;
+  border-radius: 50px !important;
+  transition: transform 0.3s ease;
+}
+.but-3{
+  border-radius: 50%;
+  border:5px solid #212529 !important;
+  transform: translate(-10px, 0px);
+  transition: transform 0.3s ease;
+}
+.button-wrapper:hover .but-2 {
+  transform: scale(0.95);
+}
+
+.button-wrapper:hover .but-3 {
+  transform: translate(-20px, 0px) rotate(-30deg) scale(0.8);
+}
+
+.hero-dog{
+   height: 160px;
+  position: absolute;
+   top: 180px;
 }

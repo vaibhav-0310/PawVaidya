@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import login from "../assests/login.svg";
+import login from "../../assests/login.svg"
 import axios from "axios";
 import {Link} from "react-router-dom";
 
