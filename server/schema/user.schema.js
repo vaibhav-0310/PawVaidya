@@ -12,7 +12,12 @@ const userSchema= mongoose.Schema({
    },
    district:{
     type:String,
-   }
+   },
+   email:{
+    type:String,
+    required:true,
+    unique:true
+   },
 });
 
 userSchema.plugin(passportLocalMongoose);

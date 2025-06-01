@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import image from "../../assests/image.svg";
 import logo from "../../assests/logo.svg";
 import axios from "axios";
+import Navbar from "../Navbar";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [form, setForm] = useState({
@@ -12,7 +14,7 @@ function Signup() {
     district: "",
     otp: "",
   });
-
+  const Navigate = useNavigate();
   const [otpSent, setOtpSent] = useState(false);
 
   const handleInput = (e) => {
@@ -46,72 +48,35 @@ function Signup() {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="container-fluid">
       <div className="row">
         <div
           className="col-8"
           style={{
             textAlign: "center",
-            background: "#F2E4C6",
+            
             height: "100vh",
           }}
         >
-          <div style={{ textAlign: "left" }}>
-            <img src={logo} alt="logo" style={{ height: "100px" }} />
-          </div>
+          
           <div className="row">
             <div className="col-11" style={{ height: "80vh" }}>
-              <img src={image} alt="Signup" style={{ height: "100%" }} />
+              <img src={image} alt="Signup" style={{ height: "100%" , marginTop:"10vh"}} />
             </div>
-            <div className="button col-1" style={{ textAlign: "right" }}>
-              <button
-                className="signup-button"
-                style={{
-                  backgroundColor: "#9e9284",
-                  color: "white",
-                  border: "none",
-                  padding: "14px 20px 14px 14px",
-                  fontSize: "18px", 
-                  borderRadius: "10px",
-                  fontWeight: "bold",
-                  cursor: "pointer",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-                  
-                }}
-              >
-                Signup
-              </button>
-              <br></br>
-              <br></br>
-              <button
-                className="login-button"
-                style={{
-                  backgroundColor: "#d7cfc2",
-                  border: "none",
-                  padding: "10px 20px",
-                  borderRadius: "10px",
-                  fontWeight: "bold",
-                  cursor: "pointer",
-                  color:"#9e9284",
-                  
-                }}
-                onClick={() => (window.location.href = "/login")}
-              >
-                Login
-              </button>
-            </div>
+            
           </div>
         </div>
         <div
           className="col-4"
           style={{
-            background: "#a8d5ba",
             display: "flex",
             alignItems: "center",
           }}
         >
           <div className="container">
-            <div style={{ textAlign: "right" }}>
+            <div style={{ textAlign: "left" }}>
               <h3>Welcome</h3>
               <h3>To</h3>
               <h3 style={{ color: "#3A9D9B" }}>PawVaidya !</h3>
@@ -120,7 +85,7 @@ function Signup() {
 
             <form
               onSubmit={otpSent ? handleSubmit : handleSendOtp}
-              style={{ textAlign: "right" }}
+              style={{ textAlign: "left" }}
             >
               <input
                 className="input-signup"
@@ -192,6 +157,7 @@ function Signup() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

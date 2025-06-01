@@ -3,66 +3,89 @@ import User from "../schema/user.schema.js";
 import passport from "passport";
 import nodemailer from "nodemailer";
 
-let o = 0;
-
 const router = express.Router();
 
-router.post("/signup", async (req, res) => {
+const otpMap = new Map();
+
+router.post("/send-otp", async (req, res) => {
   try {
-    let { username, email, district, state, password } = req.body;
-    let existingUsername = await User.findOne({ username: username });
-    if (existingUsername) {
-      res.status(403).json({ message: "User with username already exists" });
-      return;
+    let email = req.body.email;
+    if (!email) {
+      const user = await User.findOne({ username: req.body.username });
+      if (!user || !user.email) {
+        return res.status(400).json({ message: "User not found or email missing" });
+      }
+      email = user.email;
     }
-    let newUser = new User({
-      username,
-      email,
-      state,
-      district,
+
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const expiresAt = Date.now() + 5 * 60 * 1000; // expires in 5 minutes
+    otpMap.set(email, { otp, expiresAt });
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "vbhargav0310@gmail.com",
+        pass: "jhah rcml tdzi yydf", // Replace with env variable
+      },
     });
-    const { otp } = req.body; 
-    if (o == otp) {
-      User.register(newUser, password);
-      res.status(200).json({
-        message: "User created successfully",
-        user_id: newUser._id.toString(),
-      });
-    } else {
-      res.status(200).json({ message: "Invalid OTP" });
-    }
-  } catch(e) {
-    res.status(400).json({ message: "user creation failed" });
-    console.log(e);
+
+    await transporter.sendMail({
+      from: '"PawVaidya" <vbhargav0310@gmail.com>',
+      to: email,
+      subject: "OTP for PawVaidya",
+      text: `Your OTP is ${otp}`,
+    });
+
+    res.status(200).json({ message: "OTP sent to email" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to send OTP" });
   }
 });
 
-router.post("/send-otp", async(req, res) => {
-  o = Math.floor(Math.random() * 1000000);
-  const transporter = nodemailer.createTransport({
-    service:"gmail",
-    auth: {
-      user: "vbhargav0310@gmail.com",
-      pass: "elsvmuakmltbikfn",
-    },
-  });
-  const to=req.body.email;
-   const info = await transporter.sendMail({
-    from: '"PawVaidya" <vbhargav0310@gmail.com>',
-    to,
-    subject: "OTP for PawVaidya",
-    text: `OTP for Successful login is ${o}`, 
-  });
-  res.status(200).json({ message: "OTP sent", otp: o });
+router.post("/signup", async (req, res) => {
+  try {
+    const { username, email, district, state, password, otp } = req.body;
+    const existingUser = await User.findOne({ username });
+    if (existingUser) return res.status(403).json({ message: "Username already exists" });
+
+    const otpRecord = otpMap.get(email);
+    if (!otpRecord || otpRecord.otp !== otp || otpRecord.expiresAt < Date.now()) {
+      return res.status(400).json({ message: "Invalid or expired OTP" });
+    }
+
+    const newUser = new User({ username, email, district, state });
+    await User.register(newUser, password); // ensure `passport-local-mongoose` is used
+
+    otpMap.delete(email); // clean up
+    res.status(200).json({ message: "User created successfully", user_id: newUser._id.toString() });
+  } catch (e) {
+    console.error(e);
+    res.status(400).json({ message: "User creation failed" });
+  }
 });
 
+
+
 router.post("/login", (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
+  passport.authenticate("local", async (err, user, info) => {
     if (err) return res.status(500).json({ error: err.message });
     if (!user) return res.status(400).json({ error: "Invalid credentials" });
 
+    const otp = req.body.otp;
+    const email = user.email;
+
+    const otpRecord = otpMap.get(email);
+    if (!otpRecord || otpRecord.otp !== otp || otpRecord.expiresAt < Date.now()) {
+      return res.status(400).json({ error: "Invalid or expired OTP" });
+    }
+
     req.logIn(user, (err) => {
       if (err) return res.status(500).json({ error: err.message });
+
+      otpMap.delete(email); // Clean up OTP after successful login
+
       return res.json({
         message: "Login successful",
         userId: user._id.toString(),
@@ -70,4 +93,5 @@ router.post("/login", (req, res, next) => {
     });
   })(req, res, next);
 });
+
 export default router;

@@ -26,7 +26,6 @@ const HorizontalScrollCategories = () => {
               <div
                 key={index}
                 className="d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-white shadow-sm border"
-                
               >
                 <div className={`rounded-circle me-2 ${category.color}`} style={{ width: '15px', height: '15px' }}></div>
                 <span className="small text-muted">{category.name}</span>

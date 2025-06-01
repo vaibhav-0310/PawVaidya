@@ -13,9 +13,7 @@
   width: max-content;
 }
 
-.animate-scroll:hover {
-  animation-play-state: paused;
-}
+
 
 .py-4{
     text-align: center;
