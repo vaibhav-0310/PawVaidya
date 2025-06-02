@@ -1,17 +1,16 @@
 import express from 'express';
-import phr from '../schema/phr.schemas';
+import phr from '../schema/phr.schemas.js';
+import User from "../schema/user.schema.js";
 import multer from "multer";
 import { v2 as cloudinary } from 'cloudinary';
-import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import path from 'path';
 import fs from 'fs';
-import { isLoggedin } from '../middleware/auth.middleware.js';
+import { isLoggedIn } from "../middleware/middleware.js";
 import dotenv from 'dotenv';
 dotenv.config();
 
 const router =express.Router();
 
-// Configure Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -27,24 +26,25 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Upload endpoint
-router.post('/upload',isLoggedin, upload.single('file'), async (req, res) => {
+router.post('/upload', isLoggedIn, upload.single('file'), async (req, res) => {
   try {
+    console.log("File upload initiated");
     const filePath = req.file.path;
 
-    // Upload to Cloudinary
     const result = await cloudinary.uploader.upload(filePath);
+    // fs.unlinkSync(filePath); // optionally remove local file
 
-    // Delete local file
-    fs.unlinkSync(filePath);
-
-    // Save metadata to MongoDB
     const newPHR = new phr({
-      userId: req.user._id,  // Ensure userId is passed in request body
+      userId: req.user._id,
       name: result.secure_url
     });
 
     await newPHR.save();
+
+    // Update user's phr array
+    const user = await User.findById(req.user._id);
+    user.phr.push(newPHR._id);
+    await user.save();
 
     res.json({ success: true, url: result.secure_url, data: newPHR });
   } catch (err) {
@@ -52,3 +52,5 @@ router.post('/upload',isLoggedin, upload.single('file'), async (req, res) => {
     res.status(500).json({ error: 'Upload failed', details: err.message });
   }
 });
+
+export default router;
