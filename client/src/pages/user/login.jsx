@@ -32,9 +32,12 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/login", form);
+      const response = await axios.post("http://localhost:8080/login", form, {
+        withCredentials: true,
+      });
       alert("User logined in successfully");
       console.log(response.data.message);
+      navigate("/");
     } catch (err) {
       console.log(err.response?.data?.message || err.message);
       alert(err.response?.data?.message || "Login failed");

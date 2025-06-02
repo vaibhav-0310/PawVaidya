@@ -38,9 +38,12 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/signup", form);
+      const response = await axios.post("http://localhost:8080/signup", form, {
+        withCredentials: true,
+      });
       alert("User created successfully");
       console.log(response.data.message);
+      Navigate("/");
     } catch (err) {
       console.log(err.response?.data?.message || err.message);
       alert(err.response?.data?.message || "Signup failed");
