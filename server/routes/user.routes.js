@@ -58,8 +58,13 @@ router.post("/signup", async (req, res) => {
     const newUser = new User({ username, email, district, state });
     await User.register(newUser, password); 
 
-    otpMap.delete(email); 
-    res.status(200).json({ message: "User created successfully", user_id: newUser._id.toString() });
+      req.login(newUser, (err) => {
+      if (err) {
+        return res.status(500).json({ message: "Login after signup failed" });
+      }
+      otpMap.delete(email);
+      res.status(200).json({ message: "User created and logged in successfully", user_id: newUser._id.toString() });
+    });
   } catch (e) {
     console.error(e);
     res.status(400).json({ message: "User creation failed" });

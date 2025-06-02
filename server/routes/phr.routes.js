@@ -53,4 +53,16 @@ router.post('/upload', isLoggedIn, upload.single('file'), async (req, res) => {
   }
 });
 
+router.get('/user/phrs', isLoggedIn, async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const userPHRs = await phr.find({ userId }).sort({ createdAt: -1 });
+
+    return res.json(userPHRs);
+  } catch (err) {
+    console.error("Failed to fetch PHR files:", err);
+    return res.status(500).json({ error: "Failed to fetch PHR files" });
+  }
+});
 export default router;
