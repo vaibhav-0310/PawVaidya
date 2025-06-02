@@ -4,6 +4,7 @@ import Navbar from "../Navbar";
 
 function Phr() {
   const [file, setFile] = useState(null);
+  const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("info");
   const [phrList, setPhrList] = useState([]);
@@ -14,6 +15,18 @@ function Phr() {
   const onFileChange = (e) => {
     setFile(e.target.files[0]);
     setMessage(""); // Clear any previous messages
+    
+    // Auto-populate title with filename (without extension) if title is empty
+    if (!title && e.target.files[0]) {
+      const fileName = e.target.files[0].name;
+      const nameWithoutExt = fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
+      setTitle(nameWithoutExt);
+    }
+  };
+
+  // Handle title change
+  const onTitleChange = (e) => {
+    setTitle(e.target.value);
   };
 
   // Upload file to server
@@ -25,9 +38,16 @@ function Phr() {
       return;
     }
 
+    if (!title.trim()) {
+      setMessage("Please enter a title for your file.");
+      setMessageType("warning");
+      return;
+    }
+
     setIsUploading(true);
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("title", title.trim());
 
     try {
       const res = await axios.post("http://localhost:8080/upload", formData, {
@@ -40,6 +60,7 @@ function Phr() {
       setMessage("File uploaded successfully!");
       setMessageType("success");
       setFile(null);
+      setTitle("");
       document.querySelector('input[type="file"]').value = ""; // Clear file input
       fetchPHRs(); // refresh list
     } catch (err) {
@@ -133,18 +154,38 @@ function Phr() {
                   <form onSubmit={onSubmit}>
                     <div className="mb-4">
                       <label className="form-label fw-semibold text-dark mb-3">
+                        Document Title
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control form-control-lg border-2 rounded-3"
+                        placeholder="Enter a title for your document (e.g., Lab Report, X-Ray, Prescription)"
+                        value={title}
+                        onChange={onTitleChange}
+                        style={{
+                          border: title.trim() ? "2px solid #28a745" : "2px solid #dee2e6",
+                          fontSize: "1rem",
+                        }}
+                      />
+                      <small className="text-muted mt-1 d-block">
+                        This title will help you identify your document later
+                      </small>
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="form-label fw-semibold text-dark mb-3">
                         Choose File to Upload
                       </label>
                       <div className="position-relative">
                         <input
                           type="file"
-                          className="form-control form-control-sm border-2 rounded-2"
+                          className="form-control form-control-lg border-2 rounded-3"
                           onChange={onFileChange}
                           accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xls,.xlsx"
                           style={{
-                            height: "40px",
-                            paddingTop: "6px",
-                            fontSize: "0.9rem",
+                            height: "50px",
+                            paddingTop: "10px",
+                            fontSize: "1rem",
                             border: file
                               ? "2px solid #28a745"
                               : "2px dashed #dee2e6",
@@ -166,7 +207,7 @@ function Phr() {
                       <button
                         type="submit"
                         className="btn btn-primary btn-lg rounded-3 py-3 fw-semibold"
-                        disabled={isUploading}
+                        disabled={isUploading || !file || !title.trim()}
                         style={{
                           background:
                             "linear-gradient(45deg, #007bff, #0056b3)",
@@ -273,7 +314,7 @@ function Phr() {
                               className="border-0 py-3"
                               style={{ fontWeight: "600" }}
                             >
-                              File
+                              Document
                             </th>
                             <th
                               className="border-0 py-3"
@@ -307,9 +348,7 @@ function Phr() {
                                   </span>
                                   <div>
                                     <div className="fw-semibold text-dark">
-                                      {file.name.length > 40
-                                        ? file.name.substring(0, 40) + "..."
-                                        : file.name}
+                                      {file.title}
                                     </div>
                                     <small className="text-muted">
                                       {file.size && formatFileSize(file.size)}
@@ -321,12 +360,12 @@ function Phr() {
                                 <div className="text-muted">
                                   <div>
                                     {new Date(
-                                      file.timeStamp
+                                      file.timeStamp || file.createdAt
                                     ).toLocaleDateString()}
                                   </div>
                                   <small>
                                     {new Date(
-                                      file.timeStamp
+                                      file.timeStamp || file.createdAt
                                     ).toLocaleTimeString()}
                                   </small>
                                 </div>

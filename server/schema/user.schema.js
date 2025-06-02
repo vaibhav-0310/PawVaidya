@@ -18,10 +18,6 @@ const userSchema= mongoose.Schema({
     required:true,
     unique:true
    },
-   phr: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "phr"
-   }],
 });
 
 userSchema.plugin(passportLocalMongoose);

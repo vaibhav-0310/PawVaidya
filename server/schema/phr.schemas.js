@@ -1,6 +1,10 @@
 import mongoose,{Schema} from "mongoose";
 
 const PHRSchema = new Schema({
+  title:{
+    type: String,
+    required: true, // Title is required
+  },
   userId: {
     type: Schema.Types.ObjectId,
     ref: "User",
