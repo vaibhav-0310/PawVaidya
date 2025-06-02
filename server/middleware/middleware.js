@@ -2,7 +2,6 @@ import express from "express";
 import passport from "passport";
 
 const isLoggedIn = (req, res, next) => {
-  
   if (req.isAuthenticated()) {
     return next();
   }
