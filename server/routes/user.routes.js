@@ -19,14 +19,14 @@ router.post("/send-otp", async (req, res) => {
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    const expiresAt = Date.now() + 5 * 60 * 1000; // expires in 5 minutes
+    const expiresAt = Date.now() + 5 * 60 * 1000;
     otpMap.set(email, { otp, expiresAt });
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: "vbhargav0310@gmail.com",
-        pass: "jhah rcml tdzi yydf", // Replace with env variable
+        pass: "jhah rcml tdzi yydf", 
       },
     });
 
@@ -40,7 +40,7 @@ router.post("/send-otp", async (req, res) => {
     res.status(200).json({ message: "OTP sent to email" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Failed to send OTP" });
+    res.status(500).json({ message: error.message || "Failed to send OTP" });
   }
 });
 
@@ -56,9 +56,9 @@ router.post("/signup", async (req, res) => {
     }
 
     const newUser = new User({ username, email, district, state });
-    await User.register(newUser, password); // ensure `passport-local-mongoose` is used
+    await User.register(newUser, password); 
 
-    otpMap.delete(email); // clean up
+    otpMap.delete(email); 
     res.status(200).json({ message: "User created successfully", user_id: newUser._id.toString() });
   } catch (e) {
     console.error(e);
@@ -84,8 +84,7 @@ router.post("/login", (req, res, next) => {
     req.logIn(user, (err) => {
       if (err) return res.status(500).json({ error: err.message });
 
-      otpMap.delete(email); // Clean up OTP after successful login
-
+      otpMap.delete(email);
       return res.json({
         message: "Login successful",
         userId: user._id.toString(),
