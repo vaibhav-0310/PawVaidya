@@ -7,13 +7,13 @@ const HorizontalScrollCategories = () => {
   const categories = [
     { name: 'Wellness care', color: 'bg-secondary', active: true },
     { name: 'Dental care', color: 'bg-danger' },
-    { name: 'In house laboratory', color: 'bg-danger' },
+    { name: 'In house laboratory', color: 'bg-warning' },
     { name: 'Wellness care', color: 'bg-success' },
     { name: 'Parasite prevention', color: 'bg-primary' },
     { name: 'Pet grooming', color: 'bg-warning' },
     { name: 'Vaccination', color: 'bg-danger' },
-    { name: 'Emergency care', color: 'bg-purple' }, 
-    { name: 'Surgery', color: 'bg-indigo' }, 
+    { name: 'Emergency care', color: 'bg-secondary' }, 
+    { name: 'Surgery', color: 'bg-warning' }, 
     { name: 'Boarding', color: 'bg-info' }
   ];
 

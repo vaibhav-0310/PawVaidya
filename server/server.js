@@ -19,7 +19,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   session({
-    store: MongoStore.create({ mongoUrl: process.env.MONGO_URL }),
     secret: process.env.SESSION_SECRET || "random",
     resave: false,
     saveUninitialized: false,
@@ -52,7 +51,12 @@ connect()
 //routes
 app.use(userRoutes);
 app.use(mainRoutes);
-
+app.use((req, res, next) => {
+  if (req.user) {
+    console.log("Authenticated user:", req.user);
+  }
+  next();
+});
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome to PawVaidya" });
 });
