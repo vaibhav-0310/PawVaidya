@@ -47,7 +47,7 @@ function Phr() {
     formData.append("title", title.trim());
 
     try {
-      const res = await axios.post("http://localhost:8080/upload", formData, {
+      const res = await axios.post("/api/upload", formData, {
         withCredentials: true,
         headers: {
           "Content-Type": "multipart/form-data",
@@ -73,7 +73,7 @@ function Phr() {
   const fetchPHRs = async () => {
     try {
       setIsLoading(true);
-      const res = await axios.get("http://localhost:8080/user/phrs", {
+      const res = await axios.get("/api/user/phrs", {
         withCredentials: true,
       });
       setPhrList(res.data);

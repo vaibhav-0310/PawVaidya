@@ -9,7 +9,7 @@ import "dotenv/config";
 import User from "./schema/user.schema.js";
 import userRoutes from "./routes/user.routes.js";
 import mainRoutes from "./routes/main.routes.js";
-import MongoStore from 'connect-mongo';
+import essentialRoutes from "./routes/essential.routes.js";
 import phrRoutes from "./routes/phr.routes.js";
 const app = express();
 const port = process.env.PORT;
@@ -50,9 +50,10 @@ connect()
 
 
 //routes
-app.use(userRoutes);
-app.use(mainRoutes);
-app.use(phrRoutes);
+app.use("/api", userRoutes);
+app.use("/api", mainRoutes);
+app.use("/api", phrRoutes);
+app.use("/api", essentialRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome to PawVaidya" });

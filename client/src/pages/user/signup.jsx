@@ -24,7 +24,7 @@ function Signup() {
   const handleSendOtp = async (e) => {
     e.preventDefault();
     try {
-      const re = await axios.post("http://localhost:8080/send-otp", {
+      const re = await axios.post("/api/send-otp", {
         email: form.email,
       });
       setOtpSent(true);
@@ -38,7 +38,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/signup", form, {
+      const response = await axios.post("/api/signup", form, {
         withCredentials: true,
       });
       alert("User created successfully");

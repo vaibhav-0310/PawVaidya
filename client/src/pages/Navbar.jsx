@@ -9,7 +9,7 @@ function Navbar() {
 
 const logout = useCallback((e) => {
   e.preventDefault();
-  axios.get("http://localhost:8080/logout", { withCredentials: true })
+  axios.get("/api/logout", { withCredentials: true })
     .then((res) => {
       alert("user logged out successfully");
       console.log("Logout successful:", res.data);
@@ -22,7 +22,7 @@ const logout = useCallback((e) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/auth-status",{withCredentials: true})
+      .get("/api/auth-status",{withCredentials: true})
       .then((res) => {
         console.log("Auth status:", res.data);
         if (res.data.isAuthenticated) {

@@ -19,7 +19,7 @@ function Login() {
   const handleSendOtp = async (e) => {
     e.preventDefault();
     try {
-      const re = await axios.post("http://localhost:8080/send-otp", {
+      const re = await axios.post("/api/send-otp", {
         username: form.username,
       });
       setOtpSent(true);
@@ -32,7 +32,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/login", form, {
+      const response = await axios.post("/api/login", form, {
         withCredentials: true,
       });
       alert("User logined in successfully");
