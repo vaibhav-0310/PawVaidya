@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../Navbar";
-
+import Footer from "../footer";
 function Phr() {
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");
@@ -123,7 +123,7 @@ function Phr() {
   return (
     <>
       <Navbar />
-      <div className="min-vh-100" style={{ backgroundColor: "#f8f9fa" }}>
+      <div className="min-vh-100" >
         <div className="container py-5">
           <div className="row mb-5">
             <div className="col-12">
@@ -391,7 +391,7 @@ function Phr() {
           </div>
         </div>
       </div>
-
+      <Footer />
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"

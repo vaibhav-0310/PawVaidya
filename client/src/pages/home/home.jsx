@@ -3,6 +3,7 @@ import Navbar from '../Navbar';
 import Hero from './hero';
 import HorizontalScrollCategories from './scroll';
 import Services from './services';
+import Footer from "../footer";
 
 function Home() {
     return ( 
@@ -11,6 +12,7 @@ function Home() {
      <Hero/>
      <HorizontalScrollCategories/>
      <Services/>
+     <Footer/>
      </>
      );
 }

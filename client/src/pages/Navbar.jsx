@@ -71,13 +71,13 @@ const logout = useCallback((e) => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/pets">
-                    Pets
+                  <Link className="nav-link" to="/essentials">
+                    Essentials
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/essentials">
-                    Essentials
+                  <Link className="nav-link" to="/blog">
+                    Blog
                   </Link>
                 </li>
                 <li className="nav-item">

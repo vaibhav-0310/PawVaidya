@@ -91,3 +91,18 @@ body {
   position: absolute;
    top: 180px;
 }
+
+/* footer */
+.footer-container {
+  background-color: #000 !important;
+  padding: 20px  !important;
+  color:#fff;
+  width: 80% !important;
+  border-radius: 30px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  background-image: url("https://cdn.prod.website-files.com/67607a4da94c236117377bec/677225d96a3091c1df773e4e_img-footer.svg");
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  background-size: auto;
+}
