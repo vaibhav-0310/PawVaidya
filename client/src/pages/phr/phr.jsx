@@ -11,12 +11,11 @@ function Phr() {
   const [isUploading, setIsUploading] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Handle file selection
   const onFileChange = (e) => {
     setFile(e.target.files[0]);
-    setMessage(""); // Clear any previous messages
+    setMessage(""); 
     
-    // Auto-populate title with filename (without extension) if title is empty
+  
     if (!title && e.target.files[0]) {
       const fileName = e.target.files[0].name;
       const nameWithoutExt = fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
@@ -24,12 +23,10 @@ function Phr() {
     }
   };
 
-  // Handle title change
   const onTitleChange = (e) => {
     setTitle(e.target.value);
   };
 
-  // Upload file to server
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!file) {
@@ -61,8 +58,8 @@ function Phr() {
       setMessageType("success");
       setFile(null);
       setTitle("");
-      document.querySelector('input[type="file"]').value = ""; // Clear file input
-      fetchPHRs(); // refresh list
+      document.querySelector('input[type="file"]').value = ""; 
+      fetchPHRs();
     } catch (err) {
       console.error(err);
       setMessage("File upload failed. Please try again.");
@@ -94,20 +91,20 @@ function Phr() {
     const extension = filename.split(".").pop().toLowerCase();
     switch (extension) {
       case "pdf":
-        return "📄";
+        return <i className="fa-solid fa-file-pdf"></i>;
       case "jpg":
       case "jpeg":
       case "png":
       case "gif":
-        return "🖼️";
+        return <i className="fa-solid fa-image"></i>;
       case "doc":
       case "docx":
-        return "📝";
+        return <i className="fa-solid fa-file-word"></i>;
       case "xls":
       case "xlsx":
-        return "📊";
+        return <i className="fa-solid fa-file-excel"></i>;
       default:
-        return "📁";
+        return <i className="fa-solid fa-folder"></i>;
     }
   };
 
@@ -167,9 +164,7 @@ function Phr() {
                           fontSize: "1rem",
                         }}
                       />
-                      <small className="text-muted mt-1 d-block">
-                        This title will help you identify your document later
-                      </small>
+                      
                     </div>
 
                     <div className="mb-4">

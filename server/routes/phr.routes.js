@@ -31,8 +31,6 @@ router.post('/upload', isLoggedIn, upload.single('file'), async (req, res) => {
     console.log("File upload initiated");
     const filePath = req.file.path;
     const { title } = req.body;
-
-    // Validate title
     if (!title || !title.trim()) {
       return res.status(400).json({ 
         error: 'Title is required', 
@@ -51,8 +49,6 @@ router.post('/upload', isLoggedIn, upload.single('file'), async (req, res) => {
     });
 
     await newPHR.save();
-
-    // Update user's phr array
     const user = await User.findById(req.user._id);
     if (!user.phr) {
   user.phr = [];
@@ -77,7 +73,6 @@ router.post('/upload', isLoggedIn, upload.single('file'), async (req, res) => {
   }
 });
 
-// Get PHRs route - remains the same but ensure it returns title
 router.get('/user/phrs', isLoggedIn, async (req, res) => {
   try {
     const userId = req.user._id;

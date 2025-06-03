@@ -58,6 +58,8 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome to PawVaidya" });
 });
 
+
+
 app.listen(port, () => {
   console.log(`server started at http://localhost:${port}`);
 });

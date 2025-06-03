@@ -4,6 +4,7 @@ import Login from "./pages/user/login";
 import {BrowserRouter, Route, Routes} from "react-router";
 import Home from "./pages/home/home";
 import Phr from "./pages/phr/phr";
+import Error from "./pages/error";
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
       <Route path="/signup" element={<Signup/>}/>
        <Route path="/login" element={<Login/>}/>
        <Route path="/phr" element={<Phr/>}/>
-      <Route path="*" element={<h1>404 Not Found</h1>}/>
+      <Route path="*" element={<Error/>}/>
     </Routes>
     </BrowserRouter>
   );
