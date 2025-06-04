@@ -1,7 +1,7 @@
 import React from "react";
 import Hero from "./hero";
 import Navbar from "../Navbar";
-import Footer from "../footer";
+import Footer from "../Footer";
 import Items from "./items";
 import axios from "axios";
 
@@ -21,6 +21,8 @@ function Essentials() {
         console.error("Error fetching essentials:", error);
       }
     };
+
+
 
     fetchEssentials();
   }, []);

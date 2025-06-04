@@ -132,7 +132,7 @@ function Phr() {
                   Personal Health Records
                 </h1>
                 <p className="lead text-muted">
-                  Securely upload and manage your medical documents
+                  Securely upload and manage your pet's medical documents
                 </p>
               </div>
             </div>
