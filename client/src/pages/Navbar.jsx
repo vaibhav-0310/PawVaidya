@@ -107,14 +107,15 @@ const logout = useCallback((e) => {
                 </a>
                 <ul className="dropdown-menu">
                   <li>
-                    <a className="dropdown-item" href="#" onClick={logout}>
+                    <Link className="dropdown-item" to="/cart">
+                     <i class="fa-solid fa-cart-shopping"></i>&nbsp; Cart
+                    </Link>
+                  </li>
+                  <hr></hr>
+                  <li>
+                     <a className="dropdown-item" href="#" onClick={logout}>
                       Logout
                     </a>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/cart">
-                      Cart
-                    </Link>
                   </li>
                 </ul>
               </div>
