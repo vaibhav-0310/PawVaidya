@@ -17,6 +17,7 @@ const connect = async () => {
 };
 const pushEssentials = async (essentialsArray) => {
   try {
+    await Essential.deleteMany({}); // Clear existing essentials
     await Essential.insertMany(essentialsArray);
     console.log("All essential items saved successfully");
   } catch (error) {

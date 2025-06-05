@@ -1,7 +1,7 @@
 import React from "react";
 import Hero from "./hero";
 import Navbar from "../Navbar";
-import Footer from "../Footer";
+import Footer from "../footer.jsx";
 import Items from "./items";
 import axios from "axios";
 
