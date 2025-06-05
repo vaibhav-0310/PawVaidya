@@ -8,6 +8,7 @@ import Essentials from "./pages/essentials/essentials";
 import Error from "./pages/error";
 import Cart from "./pages/essentials/cart";
 import Blogs from "./pages/blogs/Blogs";
+import Vet from "./pages/vet/Vet";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
        <Route path="/blog" element={<Blogs/>}/>
        <Route path="/essentials" element={<Essentials/>}/>
        <Route path="/cart" element={<Cart/>}/>
+       <Route path="/vet" element={<Vet/>}/>
       <Route path="*" element={<Error/>}/>
     </Routes>
     </BrowserRouter>

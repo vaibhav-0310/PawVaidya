@@ -128,12 +128,15 @@ function Phr() {
           <div className="row mb-5">
             <div className="col-12">
               <div className="text-center mb-4">
-                <h1 className="display-4  text-primary mb-3">
-                  Personal Health <span className="back">Records</span>
-                </h1>
-                <p className="lead text-muted">
-                  &#128308; Securely upload and manage your pet's medical documents
-                </p>
+                &#128308; Vet Docs
+            <br />
+            <br></br>
+            <span style={{ fontSize: "50px", fontWeight: "bold" }}>
+               Personal Health <span className="back">Records</span>
+              
+            </span><br/><br/>
+           Securely upload and manage your pet's medical documents 
+               
               </div>
             </div>
           </div>

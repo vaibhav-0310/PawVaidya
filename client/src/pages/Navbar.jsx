@@ -81,7 +81,7 @@ const logout = useCallback((e) => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/consult">
+                  <Link className="nav-link" to="/vet">
                     Consult a Vet
                   </Link>
                 </li>
