@@ -128,11 +128,11 @@ function Phr() {
           <div className="row mb-5">
             <div className="col-12">
               <div className="text-center mb-4">
-                <h1 className="display-4 fw-bold text-primary mb-3">
-                  Personal Health Records
+                <h1 className="display-4  text-primary mb-3">
+                  Personal Health <span className="back">Records</span>
                 </h1>
                 <p className="lead text-muted">
-                  Securely upload and manage your pet's medical documents
+                  &#128308; Securely upload and manage your pet's medical documents
                 </p>
               </div>
             </div>

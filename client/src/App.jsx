@@ -7,6 +7,7 @@ import Phr from "./pages/phr/phr";
 import Essentials from "./pages/essentials/essentials";
 import Error from "./pages/error";
 import Cart from "./pages/essentials/cart";
+import Blogs from "./pages/blogs/Blogs";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route path="/signup" element={<Signup/>}/>
        <Route path="/login" element={<Login/>}/>
        <Route path="/phr" element={<Phr/>}/>
+       <Route path="/blog" element={<Blogs/>}/>
        <Route path="/essentials" element={<Essentials/>}/>
        <Route path="/cart" element={<Cart/>}/>
       <Route path="*" element={<Error/>}/>
