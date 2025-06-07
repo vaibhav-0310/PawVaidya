@@ -4,6 +4,7 @@ import Footer from "../footer.jsx";
 import Container from "./container.jsx";
 import Image from './image.jsx';
 import Team from './team.jsx';
+import Services from './services.jsx';
 function Vet() {
     const data=[
         {
@@ -42,6 +43,7 @@ function Vet() {
         <Navbar/>
         <Container/>
         <Image/>
+        <Services/>
         <div className="container mt-5">
             <h2 className="text-center mb-4">Meet Our Team</h2>
             <div className="row">
@@ -50,6 +52,7 @@ function Vet() {
                 ))}
             </div>
         </div>
+        
         <Footer/>
         </>
     );
