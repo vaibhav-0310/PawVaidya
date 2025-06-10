@@ -1,0 +1,19 @@
+<svg width="200" height="300" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Earpieces -->
+  <circle cx="50" cy="30" r="8" fill="#444"/>
+  <circle cx="150" cy="30" r="8" fill="#444"/>
+
+  <!-- Tubes to Y-junction -->
+  <path d="M50 30 C50 60, 70 90, 100 110" stroke="#333" stroke-width="4" fill="none"/>
+  <path d="M150 30 C150 60, 130 90, 100 110" stroke="#333" stroke-width="4" fill="none"/>
+
+  <!-- Main tube down to chestpiece -->
+  <path d="M100 110 C100 150, 100 200, 130 220" stroke="#1c1c1c" stroke-width="5" fill="none"/>
+
+  <!-- Chestpiece (head of stethoscope) -->
+  <circle cx="145" cy="225" r="15" fill="#555" stroke="#222" stroke-width="3"/>
+  <circle cx="145" cy="225" r="7" fill="#bbb"/>
+
+  <!-- Decorative shadow -->
+  <ellipse cx="145" cy="230" rx="18" ry="4" fill="rgba(0,0,0,0.2)" />
+</svg>
