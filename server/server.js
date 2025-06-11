@@ -14,6 +14,7 @@ import phrRoutes from "./routes/phr.routes.js";
 import blogroutes from "./routes/blog.route.js";
 import blog from "./data/blog.js";
 import payment from "./routes/payment.route.js";
+import cart from "./routes/cart.route.js";
 const app = express();
 const port = process.env.PORT;
 //middleware
@@ -59,6 +60,7 @@ app.use("/api", phrRoutes);
 app.use("/api", essentialRoutes);
 app.use("/api", blogroutes);
 app.use("/api/paypal", payment);
+app.use("/api", cart);
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome to PawVaidya" });
