@@ -49,7 +49,7 @@ connect()
     console.log("connected to database");
   })
   .catch((err) => {
-    console.log(e);
+    console.log(err);
   });
 
 
