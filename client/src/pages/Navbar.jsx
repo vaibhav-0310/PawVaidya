@@ -62,68 +62,68 @@ const logout = useCallback((e) => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav nav nav-underline">
-                <li className="nav-item">
-                  <Link className="nav-link" aria-current="page" to="/">
-                    Home
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav nav nav-underline mx-auto">
+              <li className="nav-item">
+                <Link className="nav-link" aria-current="page" to="/">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/essentials">
+                  Essentials
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/blog">
+                  Blog
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/vet">
+                  Consult a Vet
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/phr">
+                  Patient PHR
+                </Link>
+              </li>
+            </ul>
+            <div className="navbar-nav">
+              {user.username ? (
+                <div className="nav-item dropdown">
+                  <a
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Welcome, {user.username}
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <Link className="dropdown-item" to="/cart">
+                       <i className="fa-solid fa-cart-shopping"></i>&nbsp; Cart
+                      </Link>
+                    </li>
+                    <li><hr className="dropdown-divider" /></li>
+                    <li>
+                       <a className="dropdown-item" href="#" onClick={logout}>
+                        Logout
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                <div className="nav-item">
+                  <Link to="/login">
+                    <button className="btn btn-dark but-1">Login</button>
                   </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/essentials">
-                    Essentials
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/blog">
-                    Blog
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/vet">
-                    Consult a Vet
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/phr">
-                    Patient PHR
-                  </Link>
-                </li>
-              </ul>
+                </div>
+              )}
             </div>
-          </div>
-          <div>
-            {user.username ? (
-              <div className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Welcome, {user.username}
-                </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link className="dropdown-item" to="/cart">
-                     <i class="fa-solid fa-cart-shopping"></i>&nbsp; Cart
-                    </Link>
-                  </li>
-                  <hr></hr>
-                  <li>
-                     <a className="dropdown-item" href="#" onClick={logout}>
-                      Logout
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              <Link to="/login">
-                <button className="btn btn-dark but-1">Login</button>
-              </Link>
-            )}
           </div>
         </div>
       </nav>

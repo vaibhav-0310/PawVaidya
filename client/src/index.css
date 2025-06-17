@@ -136,3 +136,25 @@ body {
   background-color: white !important;
   border-radius: 30px !important;
 }
+
+.cal{
+  border: 2px solid black !important;
+  border-radius: 100px;
+  background-color: yellow;
+  width: 30px !important;
+  text-align: center !important;
+}
+#laptop{
+  background-color: rgb(93, 195, 93);
+}
+#ruppee{
+  background-color: rgb(214, 85, 85);
+}
+.appointment{
+  background-color: rgb(255, 255, 255);
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  border: 2px solid #ccc;
+}
