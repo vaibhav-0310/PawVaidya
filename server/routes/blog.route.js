@@ -24,7 +24,7 @@ router.post("/create/blog", async (req, res) => {
         const newBlog = new Blog({
             title,
             description: content, 
-            image: image || null // Optional field
+            image: image || null 
         });
 
         const savedBlog = await newBlog.save();
@@ -33,4 +33,18 @@ router.post("/create/blog", async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
+router.get("/blog/:blogId", async (req, res) => {
+    try {
+        const { blogId } = req.params;
+        const blog = await Blog.findById(blogId);
+        if (!blog) return res.status(404).json({ message: "Blog not found" });
+        res.json(blog);
+    } catch (err) {
+        console.error("Server error:", err);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+
 export default router;

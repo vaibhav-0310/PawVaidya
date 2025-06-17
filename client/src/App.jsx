@@ -11,6 +11,8 @@ import Blogs from "./pages/blogs/Blogs";
 import Vet from "./pages/vet/Vet";
 import CreateBlog from "./pages/blogs/create";
 import Navbar from "./utils/Navbar";
+import ShowBlog from "./pages/blogs/ShowBlog";
+
 
 function App() {
   return (
@@ -23,9 +25,10 @@ function App() {
        <Route path="/phr" element={<Phr/>}/>
        <Route path="/blog" element={<Blogs/>}/>
        <Route path="/essentials" element={<Essentials/>}/>
-       <Route path="/cart" element={<Cart/>}/>
+       <Route path="/cart" element={ <Cart/>}/>
        <Route path="/vet" element={<Vet/>}/>
        <Route path="/create/blog" element={<CreateBlog/>}/>
+       <Route path="/blog/:blogId" element={<ShowBlog />} />
       <Route path="*" element={<Error/>}/>
     </Routes>
     </BrowserRouter>
