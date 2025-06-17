@@ -10,27 +10,27 @@ function Vet() {
         {
             image: "https://cdn.prod.website-files.com/67607a4da94c236117377c10/677c7b208e5d344187df3f26_Frame%202147226655.webp",
             name:"Dr. Sandra",
-            post:"Veterinarian",
+            post:"Preventive Care Specialist",
         },
         {
             image: "https://cdn.prod.website-files.com/67607a4da94c236117377c10/677c7b168c35cfc04e2ed001_Frame%202147226654.webp",
             name:"Dr. Lucia",
-            post:"Veterinarian",
+            post:"Grooming Expert",
         },
         {
             image: "https://cdn.prod.website-files.com/67607a4da94c236117377c10/677c7b089299666fd589bf4b_Frame%202147226648.webp",
             name:"Dr. Lily",
-            post:"Veterinarian",
+            post:"Surgeon",
         },
         {
-            image: "hhttps://cdn.prod.website-files.com/67607a4da94c236117377c10/677c7b029299666fd589b980_Frame%202147226649.webp",
+            image: "https://cdn.prod.website-files.com/67607a4da94c236117377c10/677c7b029299666fd589b980_Frame%202147226649.webp",
             name:"Dr. Simth",
-            post:"Veterinarian",
+            post:"Diagnostic Specialist",
         },
         {
             image: "https://cdn.prod.website-files.com/67607a4da94c236117377c10/677c7af0608d1e4140db5b84_Frame%202147226647.webp",
             name:"Dr. Laura",
-            post:"Veterinarian",
+            post:"Veterinary Specialist",
         },
         {
             image: "https://cdn.prod.website-files.com/67607a4da94c236117377c10/677c7ae9f96aeeb814d72c5f_Frame%202147226616.webp",

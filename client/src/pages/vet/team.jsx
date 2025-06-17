@@ -1,22 +1,49 @@
 import React from 'react';
+import { ArrowRight } from 'lucide-react';
 
-function Team({name,image,post}) {
-    return ( 
-        <>
-          <div className="col-md-4 mb-4">
-            <div className="card h-100 custom-card">
-                <div className="image-container">
-                    <img src={image} className="card-img-top zoom-image" alt={name} />
-                </div>
-                <div className="card-body d-flex flex-column">
-                    <h5 className="card-title">{name}</h5>
-                    <p className="card-text">{post}</p>
-                    <p>Connect!</p>
-                </div>
-            </div>
+function Team({ name, image, post }) {
+  return (
+    <div className="col-md-4 mb-4 d-flex justify-content-center">
+      <div
+        className="card shadow-sm rounded-4 overflow-hidden position-relative"
+        style={{ width: '22rem' }}
+      >
+        <img
+          src={image}
+          alt={name}
+          className="card-img-top"
+          style={{ height: '400px', objectFit: 'cover' }}
+        />
+        <div
+          className="position-absolute w-100 d-flex justify-content-between align-items-center px-3 py-2"
+          style={{
+            bottom: 0,
+            background: 'rgba(255, 255, 255, 0.9)',
+            backdropFilter: 'blur(4px)',
+          }}
+        >
+          <div>
+            <h5 className="mb-0">{name}</h5>
+            <p className="mb-0 text-muted" style={{ fontSize: '14px' }}>
+              {post}
+            </p>
+          </div>
+          <div
+            className="d-flex align-items-center justify-content-center rounded-circle"
+            style={{
+              width: '36px',
+              height: '36px',
+              backgroundColor: '#f0e6fc',
+              color: '#7b2cbf',
+              cursor: 'pointer',
+            }}
+          >
+            <ArrowRight size={18} />
+          </div>
         </div>
-        </>
-     );
+      </div>
+    </div>
+  );
 }
 
 export default Team;
