@@ -1,6 +1,5 @@
 import React from "react";
 import Hero from "./hero";
-import Navbar from "../../utils/Navbar";
 import Footer from "../../utils/footer";
 import Items from "./items";
 import axios from "axios";
@@ -29,7 +28,6 @@ function Essentials() {
   }, []);
   return (
     <>
-      <Navbar />
       <Hero />
       <div className="container my-5">
         <div className="row justify-content-start">

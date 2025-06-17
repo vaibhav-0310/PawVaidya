@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import Navbar from "../../utils/Navbar";
 import Footer from "../../utils/footer";
 import { useEffect, useState } from "react";
 
@@ -170,7 +169,6 @@ function Cart() {
 
   return (
     <>
-      <Navbar />
       <div className="container mt-5 text-center">
         &#128308; Your Cart
         <br />

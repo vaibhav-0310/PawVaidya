@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import image from "../../assests/image.svg";
 import logo from "../../assests/logo.svg";
 import axios from "axios";
-import Navbar from "../../utils/Navbar";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
@@ -52,7 +51,6 @@ function Signup() {
 
   return (
     <>
-    <Navbar />
     <div className="container-fluid">
       <div className="row">
         <div

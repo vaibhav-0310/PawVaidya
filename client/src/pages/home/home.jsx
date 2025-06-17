@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../../utils/Navbar';
 import Hero from './hero';
 import HorizontalScrollCategories from './scroll';
 import Services from './services';
@@ -10,7 +9,6 @@ import { data } from 'react-router';
 function Home() {
     return ( 
      <>
-     <Navbar/>
      <Hero/>
      <HorizontalScrollCategories/>
      <Services/>

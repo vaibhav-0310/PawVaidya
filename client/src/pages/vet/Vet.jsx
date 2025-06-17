@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from "../../utils/Navbar.jsx";
 import Footer from "../../utils/footer.jsx";
 import Container from "./container.jsx";
 import Image from './image.jsx';
@@ -40,7 +39,6 @@ function Vet() {
     ]
     return (  
         <>
-        <Navbar/>
         <Container/>
         <Image/>
         <Services/>

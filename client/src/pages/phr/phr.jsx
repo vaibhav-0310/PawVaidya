@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "../../utils/Navbar";
 import Footer from "../../utils/footer";
 function Phr() {
   const [file, setFile] = useState(null);
@@ -122,7 +121,6 @@ function Phr() {
 
   return (
     <>
-      <Navbar />
       <div className="min-vh-100" >
         <div className="container py-5">
           <div className="row mb-5">

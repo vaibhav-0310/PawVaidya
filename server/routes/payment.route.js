@@ -39,7 +39,6 @@
     router.post('/create-order', async (req, res) => {
         try {
             const { amount, items } = req.body;
-            console.log(amount, items);
 
             if (!amount || !items || items.length === 0) {
                 return res.status(400).json({ 
@@ -153,7 +152,7 @@
                 };
 
                 // In a real application, you would save 'orderData' to your database here.
-                console.log("Order captured successfully, saving to DB:", orderData);
+                
 
                 res.json({
                     success: true,

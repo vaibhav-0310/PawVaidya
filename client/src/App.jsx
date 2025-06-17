@@ -9,12 +9,14 @@ import Error from "./pages/error";
 import Cart from "./pages/essentials/cart";
 import Blogs from "./pages/blogs/Blogs";
 import Vet from "./pages/vet/Vet";
-
+import CreateBlog from "./pages/blogs/create";
+import Navbar from "./utils/Navbar";
 
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
+      <Navbar />
+      <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/signup" element={<Signup/>}/>
        <Route path="/login" element={<Login/>}/>
@@ -23,6 +25,7 @@ function App() {
        <Route path="/essentials" element={<Essentials/>}/>
        <Route path="/cart" element={<Cart/>}/>
        <Route path="/vet" element={<Vet/>}/>
+       <Route path="/create/blog" element={<CreateBlog/>}/>
       <Route path="*" element={<Error/>}/>
     </Routes>
     </BrowserRouter>

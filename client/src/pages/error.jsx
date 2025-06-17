@@ -1,10 +1,8 @@
 import React from 'react';
-import Navbar from '../utils/Navbar';
 import Footer from "../utils/footer";
 function Error() {
     return ( 
         <>
-        <Navbar/>
         <h1 className='text-center mt-5'>404 - Page Not Found</h1>
         <Footer/>
         <style jsx>{`

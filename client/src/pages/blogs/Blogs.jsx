@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from "../../utils/Navbar.jsx";
 import Footer from "../../utils/footer.jsx";
 import Container from './container.jsx';
 import Card from './card.jsx';
@@ -18,7 +17,6 @@ function Blogs() {
     },[])
     return ( 
         <>
-        <Navbar />
         <Container />
          <div className="container my-5">
         <div className="row justify-content-start">
@@ -27,7 +25,7 @@ function Blogs() {
               key={index}
               title={item.title}
               image={item.image}
-              description={item.description}
+              description={item.description.split(" ").slice(0, 10).join(" ") + (item.description.split(" ").length > 50 ? "..." : "")}
             />
           ))}
         </div>
