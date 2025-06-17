@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import login from "../../assests/login.svg"
 import axios from "axios";
 import {Link} from "react-router-dom";
-import Navbar from "../Navbar";
+import Navbar from "../../utils/Navbar";
 import { useNavigate } from "react-router-dom";
 
 function Login() {

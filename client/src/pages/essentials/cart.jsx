@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-import Navbar from "../Navbar";
-import Footer from "../Footer";
+import Navbar from "../../utils/Navbar";
+import Footer from "../../utils/footer";
 import { useEffect, useState } from "react";
 
 function Cart() {

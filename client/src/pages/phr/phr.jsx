@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "../Navbar";
-import Footer from "../footer";
+import Navbar from "../../utils/Navbar";
+import Footer from "../../utils/footer";
 function Phr() {
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");

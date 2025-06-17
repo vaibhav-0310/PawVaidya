@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from './image'; // adjust path if needed
+import Image from './image'
 
 function Gallery() {
   const images = [

@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from './Navbar';
-import Footer from "./footer";
+import Navbar from '../utils/Navbar';
+import Footer from "../utils/footer";
 function Error() {
     return ( 
         <>
