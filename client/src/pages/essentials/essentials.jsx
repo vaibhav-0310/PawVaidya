@@ -5,6 +5,7 @@ import Footer from "../footer.jsx";
 import Items from "./items";
 import axios from "axios";
 
+
 function Essentials() {
 
   let [essentialsData,setEssentialsData] = React.useState([]);
@@ -43,7 +44,7 @@ function Essentials() {
           ))}
         </div>
       </div>
-
+    
       <Footer />
     </>
   );

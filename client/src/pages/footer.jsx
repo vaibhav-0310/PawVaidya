@@ -1,8 +1,10 @@
 import React from 'react';
 import Paw from "../assests/paw.svg";
+import Gallery from './gallery';
 
 function Footer() {
     return ( <>
+    
     <div className="container footer-container">
         <div className="row">
             <div className="col-3">
