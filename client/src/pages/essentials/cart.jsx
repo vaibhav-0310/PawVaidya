@@ -197,7 +197,7 @@ function Cart() {
                   <div className="card-body d-flex flex-column">
                     <h5 className="card-title">{item.title}</h5>
                     <p className="card-text">
-                      Price: $
+                      Price: &#x20B9;
                       {typeof item.price === "string"
                         ? item.price.replace("$", "")
                         : item.price}
@@ -222,7 +222,7 @@ function Cart() {
           )}
         </div>
         {cartItems.length > 0 && (
-          <div className="row mt-4">
+          <div className="row mt-4 mb-4">
             <div className="col-md-6 offset-md-3">
               <div className="card">
                 <div className="card-body">

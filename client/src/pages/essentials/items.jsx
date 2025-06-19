@@ -25,7 +25,7 @@ function Items({ title, image, price, type }) {
         <img src={image} className="card-img-top" alt={title} />
         <div className="card-body d-flex flex-column">
           <h5 className="card-title">{title}</h5>
-          <p className="card-text">Price: {price}</p>
+          <p className="card-text">Price: &#x20B9;{price}</p>
           <p className="card-text">Type: {type}</p>
           <a href="#" className="btn btn-dark mt-auto" style={{borderRadius:"50px !important"}} onClick={cartSubmit}>Add to Cart</a>
         </div>
