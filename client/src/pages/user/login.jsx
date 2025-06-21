@@ -3,6 +3,7 @@ import login from "../../assests/login.svg"
 import axios from "axios";
 import {Link} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 function Login() {
   const [form, setForm] = useState({
@@ -22,10 +23,26 @@ function Login() {
         username: form.username,
       });
       setOtpSent(true);
-      alert("OTP sent to your email");
+      toast.success("OTP sent successfully", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (err) {
       console.log(err);
-      alert("Invalid credentials or OTP not sent");
+      toast.error(err.response?.data?.error || "Failed to send OTP", {
+        position: "center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
   const handleSubmit = async (e) => {
@@ -34,12 +51,28 @@ function Login() {
       const response = await axios.post("/api/login", form, {
         withCredentials: true,
       });
-      alert("User logined in successfully");
+      toast.success("Login successful", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       console.log(response.data.message);
       navigate("/");
     } catch (err) {
-      console.log(err.response?.data?.message || err.message);
-      alert(err.response?.data?.message || "Login failed");
+      console.log(err.response?.data?.error || err.message);
+      toast.error(err.response?.data?.error|| "Login failed", {
+        position: "center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 

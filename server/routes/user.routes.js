@@ -78,7 +78,7 @@ router.post("/signup", async (req, res) => {
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", async (err, user, info) => {
     if (err) return res.status(500).json({ error: err.message });
-    if (!user) return res.status(400).json({ error: "Invalid credentials" });
+    if (!user) return res.status(400).json({ error: "Incorrect Password or Username" });
 
     const otp = req.body.otp;
     const email = user.email;

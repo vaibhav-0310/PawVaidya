@@ -12,11 +12,14 @@ import Vet from "./pages/vet/Vet";
 import CreateBlog from "./pages/blogs/create";
 import Navbar from "./utils/Navbar";
 import ShowBlog from "./pages/blogs/ShowBlog";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
   return (
     <BrowserRouter>
+     <ToastContainer />
       <Navbar />
       <Routes>
       <Route path="/" element={<Home/>}/>

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 function Items({ title, image, price, type }) {
@@ -13,7 +14,15 @@ function Items({ title, image, price, type }) {
         type
       });
       if(response.status===201){
-        alert("Item added to cart successfully");
+        toast.success("Item added to cart successfully", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     }catch(e){
       console.error(e);

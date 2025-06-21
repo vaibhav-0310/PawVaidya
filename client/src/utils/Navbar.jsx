@@ -12,7 +12,6 @@ const logout = useCallback((e) => {
   axios.get("/api/logout", { withCredentials: true })
     .then((res) => {
       alert("user logged out successfully");
-      console.log("Logout successful:", res.data);
       setUser({ username: "" });
     })
     .catch((err) => {
@@ -24,7 +23,6 @@ const logout = useCallback((e) => {
     axios
       .get("/api/auth-status",{withCredentials: true})
       .then((res) => {
-        console.log("Auth status:", res.data);
         if (res.data.isAuthenticated) {
           setUser({ username: res.data.user.username });
         } else {

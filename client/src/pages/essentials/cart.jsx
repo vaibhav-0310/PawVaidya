@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import Footer from "../../utils/footer";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
@@ -141,9 +142,26 @@ function Cart() {
       const updatedItems = cartItems.filter((_, i) => i !== index);
       setCartItems(updatedItems);
       calculateTotal(updatedItems);
+      toast.success("Item removed from cart successfully", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (error) {
       console.error("Error removing item:", error);
-      alert("Failed to remove item. Please try again.");
+      toast.error("Failed to remove item from cart", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 

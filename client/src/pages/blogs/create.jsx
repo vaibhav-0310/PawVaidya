@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Footer from "../../utils/footer";
+import { toast } from "react-toastify";
 
 function CreateBlog() {
   const [blogs, setBlogs] = useState([]);
@@ -8,7 +9,7 @@ function CreateBlog() {
     title: "",
     author: "",
     content: "",
-    image: "", // New image field
+    image: "", 
   });
 
   const handleChange = (e) => {
@@ -26,10 +27,26 @@ function CreateBlog() {
       image
     });
     if(response.status === 201) {
-      console.log("Blog created successfully");
+      toast.success("Blog created successfully", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
     else {
-      console.error("Error creating blog");
+      toast.error("Failed to create blog", {
+        position: "top-right",  
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
     if (title && author && content) {
       setBlogs([{ ...form }, ...blogs]);

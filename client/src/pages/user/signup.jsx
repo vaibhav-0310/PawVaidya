@@ -3,6 +3,7 @@ import image from "../../assests/image.svg";
 import logo from "../../assests/logo.svg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Signup() {
   const [form, setForm] = useState({
@@ -27,10 +28,26 @@ function Signup() {
         email: form.email,
       });
       setOtpSent(true);
-      alert("OTP sent to your email");
+      toast.success("OTP sent successfully", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (err) {
       console.log(err);
-      alert("Failed to send OTP");
+      toast.error(err.response?.data?.error || "Failed to send OTP", {
+        position: "center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
@@ -40,12 +57,27 @@ function Signup() {
       const response = await axios.post("/api/signup", form, {
         withCredentials: true,
       });
-      alert("User created successfully");
-      console.log(response.data.message);
+      toast.success("Signup successful", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       Navigate("/");
     } catch (err) {
       console.log(err.response?.data?.message || err.message);
-      alert(err.response?.data?.message || "Signup failed");
+      toast.error(err.response?.data?.error || "Signup failed", {
+        position: "center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
