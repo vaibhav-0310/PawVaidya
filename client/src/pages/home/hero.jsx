@@ -7,7 +7,7 @@ function Hero() {
     <>
       <div className="container hero">
         <div className="row">
-          <div className="col-6 hero-left">
+          <div className="col-12 col-lg-6 hero-left">
             &#128308; Vertic pet solutions
             <br />
             <br></br>
@@ -44,7 +44,7 @@ function Hero() {
               </button>
             </div>
           </div>
-          <div className="col-6">
+          <div className="col-12 col-lg-6 d-none d-sm-block hero-right">
             <div className="row">
               <div className="col-2">
                 <img src={dog} className="hero-dog"/>
