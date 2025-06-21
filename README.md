@@ -9,7 +9,7 @@
 ## 🚧 Project Status
 
 🚀 **In Development**  
-We are currently working on the core features including pet profile management, vet dashboards, and appointment scheduling.
+We are currently working on the core feature including  appointment scheduling.
 
 ---
 
