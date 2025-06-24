@@ -158,3 +158,30 @@ body {
   transition: transform 0.2s ease;
   border: 2px solid #ccc;
 }
+
+@media (max-width: 768px) {
+  .hero-img {
+    height: 400px;
+  }
+  .hero-left {
+    padding-top: 50px;
+  }
+  .hero-dog {
+    height: 120px;
+    top: 100px;
+  }
+  .footer-container {
+    width: 100% !important;
+    padding: 10px !important;
+  }
+  .navbar-all {
+    padding: 0px 10px 0px 10px !important;
+  }
+  .paw{
+    height: 60px;
+    width: 130px;
+  }
+  .navbar .dropdown-menu {
+  z-index: 1050;
+}
+}
