@@ -61,7 +61,7 @@ const logout = useCallback((e) => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav nav nav-underline mx-auto">
+            <ul className="navbar-nav  nav-underline mx-auto">
               <li className="nav-item">
                 <Link className="nav-link" aria-current="page" to="/">
                   Home

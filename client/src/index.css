@@ -30,6 +30,7 @@ body {
   border-radius: 100px;
   height: 70px;
   padding: 0px 40px 0px 40px;
+  z-index: 1000;
 }
 
 .but-1 {
@@ -184,4 +185,62 @@ body {
   .navbar .dropdown-menu {
   z-index: 1050;
 }
+}
+
+/* Add these CSS styles to fix the mobile navbar collapse issues */
+
+/* For mobile devices - when navbar is collapsed */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background-color: #fff !important;
+    border-radius: 0.375rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-top: 0.5rem;
+    padding: 1rem;
+    position: relative;
+    z-index: 1000;
+  }
+  
+  /* Ensure the collapsed content takes full width */
+  .navbar-collapse.show,
+  .navbar-collapse.collapsing {
+    background-color: #fff !important;
+    width: 100%;
+  }
+  
+  /* Style the navigation items in collapsed state */
+  .navbar-collapse .navbar-nav {
+    margin-bottom: 1rem;
+  }
+  
+  .navbar-collapse .navbar-nav .nav-link {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f8f9fa;
+  }
+  
+  .navbar-collapse .navbar-nav .nav-link:last-child {
+    border-bottom: none;
+  }
+  
+  /* Style the dropdown and login button in mobile */
+  .navbar-collapse .navbar-nav:last-child {
+    margin-bottom: 0;
+    padding-top: 1rem;
+    border-top: 1px solid #f8f9fa;
+  }
+  
+  /* Ensure dropdown menus work properly in mobile */
+  .navbar-collapse .dropdown-menu {
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    background-color: #f8f9fa;
+    border: none;
+    box-shadow: none;
+  }
+  
+  .navbar-collapse .dropdown-menu .dropdown-item {
+    padding: 0.5rem 1rem;
+  }
 }
