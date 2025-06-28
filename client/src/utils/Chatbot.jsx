@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 
 const Chatbot = () => {
     const [messages, setMessages] = useState([
@@ -12,12 +13,16 @@ const Chatbot = () => {
     const [inputMessage, setInputMessage] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef(null);
+
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
+
+   
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
+
     useEffect(() => {
         const initialTipTimer = setTimeout(() => {
             setMessages((prevMessages) => [
@@ -29,39 +34,25 @@ const Chatbot = () => {
                     isService: true
                 }
             ]);
-        }, 2000); 
+        }, 2000);
         return () => clearTimeout(initialTipTimer);
     }, []); 
     const getGeminiResponse = async (userMessage) => {
-        try {
-            let chatHistory = [];
-            chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
-
-            const payload = { contents: chatHistory };
-            const apiKey = "AIzaSyA6HKqD1E8TqNqTmiDAfkagN8js9FDjm58"; 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+         try {
+            
+            const response = await axios.post('/api/gemini-chat', {
+                message: userMessage
             });
 
-            const result = await response.json(); 
-            if (result.candidates && result.candidates.length > 0 &&
-                result.candidates[0].content && result.candidates[0].content.parts &&
-                result.candidates[0].content.parts.length > 0) {
-                const text = result.candidates[0].content.parts[0].text;
-                return text;
-            } else {
-                console.error("Unexpected Gemini API response structure:", result);
-                return "I received an unexpected response from the AI. Please try again.";
-            }
+            return response.data.response; 
         } catch (error) {
-            console.error("Error generating content from Gemini:", error);
-            return "Oops! I'm having trouble connecting to my brain right now. Please try again later, or contact support directly.";
+            console.error("Error communicating with backend/Gemini:", error);
+            const errorMessage = error.response?.data?.error || error.message;
+            return `Oops! I'm having trouble connecting to my brain right now: ${errorMessage}. Please ensure the backend server is running correctly, or try again later.`;
         }
+            
     };
+
     const sendMessage = async () => {
         if (inputMessage.trim() === '') return; 
 
@@ -70,14 +61,15 @@ const Chatbot = () => {
             isUser: true,
             timestamp: new Date()
         };
+        // Add user message to state
         setMessages((prevMessages) => [...prevMessages, newUserMessage]);
-        setInputMessage(''); 
+        setInputMessage('');
         setIsTyping(true); 
 
-        // Call Gemini API for a response
+     
         const botResponseContent = await getGeminiResponse(newUserMessage.content);
 
-        // Simulate a small delay before showing bot response for better UX
+    
         setTimeout(() => {
             const newBotMessage = {
                 content: botResponseContent,
@@ -85,15 +77,16 @@ const Chatbot = () => {
                 timestamp: new Date(),
                 isService: true
             };
+        
             setMessages((prevMessages) => [...prevMessages, newBotMessage]);
             setIsTyping(false); 
-        }, 1000 + Math.random() * 500); 
+        }, 1000 + Math.random() * 500);
     };
 
-
+  
     const sendQuickMessage = (message) => {
-        setInputMessage(message);
- 
+        setInputMessage(message); 
+       
         setTimeout(() => sendMessage(), 50); 
     };
 
@@ -105,9 +98,6 @@ const Chatbot = () => {
 
     return (
         <div className="chatbot-container">
-            <style jsx>{`
-               
-            `}</style>
             <div className="chat-header">
                 <h1>PawVadiya Assistant</h1>
                 <p>Your friendly pet care companion</p>
@@ -118,6 +108,7 @@ const Chatbot = () => {
                     <div key={index} className={`message ${msg.isUser ? 'user' : 'bot'}`}>
                         <div className="avatar">{msg.isUser ? '👤' : '🐕'}</div>
                         <div className="message-content">
+                            {/* Split content by newline to render as separate paragraphs */}
                             {msg.content.split('\n').map((line, i) => (
                                 <p key={i}>{line}</p>
                             ))}
@@ -134,7 +125,7 @@ const Chatbot = () => {
                         </div>
                     </div>
                 )}
-               
+                
                 <div ref={messagesEndRef} /> 
             </div>
 
