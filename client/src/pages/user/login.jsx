@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import login from "../../assests/login.svg"
 import axios from "axios";
 import {Link} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import image from "../../assests/image.svg";
 
 function Login() {
   const [form, setForm] = useState({
@@ -92,7 +92,7 @@ function Login() {
         >
           <div className="row">
             <div className="col-11" style={{ height: "80vh" }}>
-              <img src={login} alt="login" style={{ height: "100%" }} />
+              <img src={image} alt="login" style={{ height: "100%" }} />
             </div>
             
             

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import image from "../../assests/image.svg";
+import login from "../../assests/login.svg"
 import logo from "../../assests/logo.svg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -96,7 +96,7 @@ function Signup() {
           
           <div className="row">
             <div className="col-11" style={{ height: "80vh" }}>
-              <img src={image} alt="Signup" style={{ height: "100%" , marginTop:"10vh"}} />
+              <img src={login} alt="Signup" style={{ height: "100%" , marginTop:"10vh"}} />
             </div>
             
           </div>
