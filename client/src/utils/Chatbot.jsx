@@ -5,14 +5,20 @@ const Chatbot = () => {
     const [messages, setMessages] = useState([
         {
             content: "Hi there! I'm your PawVadiya assistant. I'm here to help with pet care, veterinary services, and pet adoption. How can I assist you today? 🐾",
+            isUser: false,
+            timestamp: new Date(),
+            isService: true
         }
     ]);
     const [inputMessage, setInputMessage] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef(null);
+
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
+
+   
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
@@ -34,28 +40,41 @@ const Chatbot = () => {
         if (inputMessage.trim() === '') return; 
         const newUserMessage = {
             content: inputMessage.trim(),
+            isUser: true,
+            timestamp: new Date()
         };
         setMessages((prevMessages) => [...prevMessages, newUserMessage]);
         setInputMessage('');
         setIsTyping(true); 
+
+     
         const botResponseContent = await getGeminiResponse(newUserMessage.content);
+
+    
         setTimeout(() => {
             const newBotMessage = {
                 content: botResponseContent,
+                isUser: false,
+                timestamp: new Date(),
+                isService: true
             };
+        
             setMessages((prevMessages) => [...prevMessages, newBotMessage]);
             setIsTyping(false); 
         }, 1000 + Math.random() * 500);
     };
     const sendQuickMessage = (message) => {
         setInputMessage(message); 
+       
         setTimeout(() => sendMessage(), 50); 
     };
+
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
             sendMessage();
         }
     };
+
     return (
         <div className="chatbot-container">
             <div className="chat-header">

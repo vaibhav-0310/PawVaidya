@@ -215,16 +215,6 @@ function ShowBlog() {
                 </div>
             </div>
 
-            {/* Floating Action Button */}
-            <div className="position-fixed bottom-0 end-0 p-4">
-                <button
-                    className="btn btn-primary btn-lg rounded-circle shadow-lg"
-                    style={{ width: '60px', height: '60px' }}
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                >
-                    <i className="bi bi-arrow-up"></i>
-                </button>
-            </div>
         </div>
         <Footer />
         </>
