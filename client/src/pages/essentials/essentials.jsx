@@ -15,7 +15,6 @@ function Essentials() {
         const response = await axios("/api/essentials");
 
         const data = response.data;
-        console.log(data);
         setEssentialsData(data);
       } catch (error) {
         console.error("Error fetching essentials:", error);

@@ -31,10 +31,10 @@ function Footer() {
             <div className="col-2">
                 <h5>Contact Us</h5>
                 <ul className="list-unstyled">
-                    <li><i class="fa-solid fa-envelope"></i>&nbsp; info@pawvadia.com</li>
-                    <li><i class="fa-solid fa-phone"></i>&nbsp; 1800 123 4567</li>
-                    <li><i class="fa-solid fa-location-dot"></i>&nbsp; 123 random street, India.</li>
-                    <li><i class="fa-brands fa-instagram"></i>&nbsp; <i class="fa-brands fa-x-twitter"></i>&nbsp;<i class="fa-brands fa-facebook"></i></li>
+                    <li><i className="fa-solid fa-envelope"></i>&nbsp; info@pawvadia.com</li>
+                    <li><i className="fa-solid fa-phone"></i>&nbsp; 1800 123 4567</li>
+                    <li><i className="fa-solid fa-location-dot"></i>&nbsp; 123 random street, India.</li>
+                    <li><i className="fa-brands fa-instagram"></i>&nbsp; <i className="fa-brands fa-x-twitter"></i>&nbsp;<i className="fa-brands fa-facebook"></i></li>
                 </ul>
             </div>
             <div className="col-3"></div>
