@@ -5,45 +5,22 @@ const Chatbot = () => {
     const [messages, setMessages] = useState([
         {
             content: "Hi there! I'm your PawVadiya assistant. I'm here to help with pet care, veterinary services, and pet adoption. How can I assist you today? 🐾",
-            isUser: false,
-            timestamp: new Date(),
-            isService: true
         }
     ]);
     const [inputMessage, setInputMessage] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef(null);
-
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
-
-   
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
-
-    useEffect(() => {
-        const initialTipTimer = setTimeout(() => {
-            setMessages((prevMessages) => [
-                ...prevMessages,
-                {
-                    content: "💡 Quick tip: Use the buttons below for common questions, or type anything about pets! I can help with care tips, vet appointments, adoption info, and emergency guidance.",
-                    isUser: false,
-                    timestamp: new Date(),
-                    isService: true
-                }
-            ]);
-        }, 2000);
-        return () => clearTimeout(initialTipTimer);
-    }, []); 
     const getGeminiResponse = async (userMessage) => {
          try {
-            
             const response = await axios.post('/api/gemini-chat', {
                 message: userMessage
             });
-
             return response.data.response; 
         } catch (error) {
             console.error("Error communicating with backend/Gemini:", error);
@@ -55,47 +32,30 @@ const Chatbot = () => {
 
     const sendMessage = async () => {
         if (inputMessage.trim() === '') return; 
-
         const newUserMessage = {
             content: inputMessage.trim(),
-            isUser: true,
-            timestamp: new Date()
         };
-        // Add user message to state
         setMessages((prevMessages) => [...prevMessages, newUserMessage]);
         setInputMessage('');
         setIsTyping(true); 
-
-     
         const botResponseContent = await getGeminiResponse(newUserMessage.content);
-
-    
         setTimeout(() => {
             const newBotMessage = {
                 content: botResponseContent,
-                isUser: false,
-                timestamp: new Date(),
-                isService: true
             };
-        
             setMessages((prevMessages) => [...prevMessages, newBotMessage]);
             setIsTyping(false); 
         }, 1000 + Math.random() * 500);
     };
-
-  
     const sendQuickMessage = (message) => {
         setInputMessage(message); 
-       
         setTimeout(() => sendMessage(), 50); 
     };
-
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
             sendMessage();
         }
     };
-
     return (
         <div className="chatbot-container">
             <div className="chat-header">
@@ -108,7 +68,6 @@ const Chatbot = () => {
                     <div key={index} className={`message ${msg.isUser ? 'user' : 'bot'}`}>
                         <div className="avatar">{msg.isUser ? '👤' : '🐕'}</div>
                         <div className="message-content">
-                            {/* Split content by newline to render as separate paragraphs */}
                             {msg.content.split('\n').map((line, i) => (
                                 <p key={i}>{line}</p>
                             ))}

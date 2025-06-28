@@ -1,5 +1,5 @@
 import express from 'express';
-import { GoogleGenerativeAI } from '@google/generative-ai'; // Ensure you have this package installed
+import { GoogleGenerativeAI } from '@google/generative-ai'; 
 const router = express.Router();
 
 const API_KEY = process.env.GEMINI_API_KEY; 
@@ -23,7 +23,9 @@ router.post('/gemini-chat', async (req, res) => {
         const result = await model.generateContent(userMessage);
         const response = await result.response;
         const text = response.text();
-
+        if(!text) {
+            return res.status(500).json({ error: "Server down, try again later." });
+        }
         res.json({ response: text }); 
     } catch (error) {
         console.error("Error calling Gemini API:", error);
