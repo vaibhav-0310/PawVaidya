@@ -26,6 +26,7 @@ function Items({ title, image, price, type }) {
       }
     }catch(e){
       console.error(e);
+      toast.error(e.response?.data?.message || "Failed to add item to cart");
     }
   }
   return (

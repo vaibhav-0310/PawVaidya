@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
+// Import your pages and components
 import Signup from "./pages/user/signup";
-import Login from "./pages/user/login";
-import {BrowserRouter, Route, Routes} from "react-router";
+import Login from "./pages/user/login"; // We'll modify this to use useAuth
+import { BrowserRouter, Route, Routes } from "react-router-dom"; // Ensure react-router-dom
 import Home from "./pages/home/home";
 import Phr from "./pages/phr/phr";
 import Essentials from "./pages/essentials/essentials";
@@ -11,11 +12,15 @@ import Cart from "./pages/essentials/cart";
 import Blogs from "./pages/blogs/Blogs";
 import Vet from "./pages/vet/Vet";
 import CreateBlog from "./pages/blogs/create";
-import Navbar from "./utils/Navbar";
+import Navbar from "./utils/Navbar"; // You might want to pass auth state to Navbar
 import ShowBlog from "./pages/blogs/ShowBlog";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Chatbot from "./utils/Chatbot";
+
+// Import AuthProvider and ProtectedRoute
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoutes';
 
 
 function App() {
@@ -24,28 +29,40 @@ function App() {
     setShowChatbot((prev) => !prev);
   };
   return (
+    // Wrap your entire application with AuthProvider to make auth context available
     <BrowserRouter>
-     <ToastContainer />
-      <Navbar />
-      <Routes>
-      <Route path="/" element={<Home/>}/>
-      <Route path="/signup" element={<Signup/>}/>
-       <Route path="/login" element={<Login/>}/>
-       <Route path="/phr" element={<Phr/>}/>
-       <Route path="/blog" element={<Blogs/>}/>
-       <Route path="/essentials" element={<Essentials/>}/>
-       <Route path="/cart" element={ <Cart/>}/>
-       <Route path="/vet" element={<Vet/>}/>
-       <Route path="/create/blog" element={<CreateBlog/>}/>
-       <Route path="/blog/:blogId" element={<ShowBlog />} />
-      <Route path="*" element={<Error/>}/>
-    </Routes>
-    <button className="chatbot-toggle-button" onClick={toggleChatbot}>
-        {showChatbot ? "✕" : "💬"}
-      </button>
-      <div className={`chatbot-popup-container ${showChatbot ? "show" : ""}`}>
-        <Chatbot />
-      </div>
+      <AuthProvider>
+        <ToastContainer />
+        <Navbar /> {/* Consider passing auth state to Navbar for conditional rendering of login/logout buttons */}
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/phr" element={<Phr />} />
+          <Route path="/blog" element={<Blogs />} />
+          <Route path="/essentials" element={<Essentials />} />
+          <Route path="/vet" element={<Vet />} />
+          <Route path="/create/blog" element={<CreateBlog />} /> {/* This might also need protection if only logged-in users can create blogs */}
+
+          {/* Protected Routes: Wrap them inside a <Route element={<ProtectedRoute />}> */}
+          {/* Any routes nested here will require authentication */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/blog/:blogId" element={<ShowBlog />} />
+            {/* Add any other routes you want to protect here */}
+          </Route>
+
+          {/* Catch-all for undefined routes */}
+          <Route path="*" element={<Error />} />
+        </Routes>
+        <button className="chatbot-toggle-button" onClick={toggleChatbot}>
+          {showChatbot ? "✕" : "💬"}
+        </button>
+        <div className={`chatbot-popup-container ${showChatbot ? "show" : ""}`}>
+          <Chatbot />
+        </div>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

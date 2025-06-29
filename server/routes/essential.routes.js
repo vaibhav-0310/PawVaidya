@@ -29,7 +29,6 @@ router.post("/cart",isLoggedIn,async (req,res)=>{
           await newCart.save();
           res.status(201).json({ message: 'Item added to cart successfully' });
       } catch (error) {
-          console.error('Error adding item to cart:', error);
           res.status(500).json({ message: 'Internal server error' });
       }
 });

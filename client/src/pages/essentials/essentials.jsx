@@ -13,7 +13,6 @@ function Essentials() {
     const fetchEssentials = async () => {
       try {
         const response = await axios("/api/essentials");
-
         const data = response.data;
         setEssentialsData(data);
       } catch (error) {
