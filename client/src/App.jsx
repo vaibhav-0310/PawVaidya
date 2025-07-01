@@ -17,6 +17,7 @@ import ShowBlog from "./pages/blogs/ShowBlog";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Chatbot from "./utils/Chatbot";
+import Consult from "./pages/consult/Consult";
 
 // Import AuthProvider and ProtectedRoute
 import { AuthProvider } from './context/AuthContext';
@@ -46,6 +47,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/cart" element={<Cart />} />
             <Route path="/blog/:blogId" element={<ShowBlog />} />
+            <Route path="/consult/:id" element={<Consult />} />
           </Route>
           <Route path="*" element={<Error />} />
         </Routes>

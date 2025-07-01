@@ -16,7 +16,11 @@ import blog from "./data/blog.js";
 import payment from "./routes/payment.route.js";
 import cart from "./routes/cart.route.js";
 import chat from "./routes/chat.route.js";
+import vet from "./routes/vet.routes.js";
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20'; 
+
+import { createServer } from 'http';
+import { Server } from 'socket.io';
 const app = express();
 const port = process.env.PORT;
 //middleware
@@ -98,6 +102,14 @@ app.use("/api", blogroutes);
 app.use("/api/paypal", payment);
 app.use("/api", cart);
 app.use("/api", chat);
+app.use("/api", vet);
+
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome to PawVaidya" });

@@ -3,10 +3,9 @@ import { ArrowRight } from 'lucide-react';
 
 function Team({ name, image, post }) {
   return (
-    <div className="col-md-4 mb-4 d-flex justify-content-center">
+    <div className="w-100">
       <div
-        className="card shadow-sm rounded-4 overflow-hidden position-relative"
-        style={{ width: '22rem' }}
+        className="card shadow-sm rounded-4 overflow-hidden position-relative h-100"
       >
         <img
           src={image}
