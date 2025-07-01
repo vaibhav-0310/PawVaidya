@@ -16,6 +16,7 @@ import blog from "./data/blog.js";
 import payment from "./routes/payment.route.js";
 import cart from "./routes/cart.route.js";
 import chat from "./routes/chat.route.js";
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20'; 
 const app = express();
 const port = process.env.PORT;
 //middleware
@@ -37,7 +38,41 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(new GoogleStrategy({
+    clientID: process.env.CLIENTID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: "http://localhost:8080/api/auth/google/callback",
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    try {
+      return done(null, profile);
+    } catch (error) {
+      return done(error, null);
+    }
+  }
+));
 passport.use(new Strategy(User.authenticate()));
+passport.serializeUser((user, done) => {
+  if (user.emails) {
+    done(null, { type: 'google', email: user.emails[0].value });
+  } else {
+    done(null, { type: 'local', id: user._id });
+  }
+});
+
+passport.deserializeUser(async (serializedUser, done) => {
+  try {
+    let user;
+    if (serializedUser.type === 'google') {
+      user = await User.findOne({ email: serializedUser.email });
+    } else {
+      user = await User.findById(serializedUser.id);
+    }
+    done(null, user);
+  } catch (error) {
+    done(error, null);
+  }
+});
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 

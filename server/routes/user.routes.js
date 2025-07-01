@@ -111,6 +111,43 @@ router.get("/logout", (req, res, next) => {
   });
 });
 
+router.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
+
+router.get(
+  "/auth/google/callback",
+  passport.authenticate('google', { 
+    failureRedirect: 'http://localhost:3000/login',
+    session: true, 
+  }),
+  async (req, res) => {
+    try {
+      const googleProfile = req.user;
+      const username = googleProfile.displayName;
+      const email = googleProfile.emails[0].value;
+
+      let user = await User.findOne({ email });
+      if (!user) {  
+        user = new User({
+          username,
+          email,
+          cart: [], 
+        });
+        await user.save();
+      }
+
+      req.login(user, (err) => {
+        if (err) {
+          console.error("Login error:", err);
+          return res.redirect('http://localhost:3000/login');
+        }
+        res.redirect('http://localhost:3000');
+      });
+    } catch (error) {
+      console.error("Google callback error:", error);
+      res.redirect('http://localhost:3000/login');
+    }
+  }
+);
 
 export default router;

@@ -17,6 +17,11 @@ function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+    const handleGoogleLogin = () => {
+     window.location.href = '/api/auth/google';
+     toast.info('Redirecting to Google login...');
+    };
+
   const handleSendOtp = async (e) => {
     e.preventDefault();
     if (!form.username || !form.password) {
@@ -118,7 +123,20 @@ function Login() {
               <h3 style={{ color: "#3A9D9B" }}>PawVaidya !</h3>
               <p>Access expert advice for your furry friends</p>
             </div>
-             <br></br>
+             <div className="text-center">
+                <button className="btn" style={{ background: "#3A9D9B" }} onClick={handleGoogleLogin}>
+                  {" "}
+                  <i className="fa-brands fa-google"></i> Continue with Google
+                </button>
+              </div>
+              <div
+                className="hr"
+                style={{ display: "flex", alignItems: "center", gap: "10px", marginTop: "20px" }}
+              >
+                <hr style={{ flex: 1 }} />
+                OR
+                <hr style={{ flex: 1 }} />
+              </div>
             <form onSubmit={otpSent ? handleSubmit : handleSendOtp} style={{ textAlign: "center" }}>
               <input
                 className="input-signup"
