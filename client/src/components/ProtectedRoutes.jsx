@@ -5,15 +5,12 @@ import { useAuth } from '../context/AuthContext';
 
 const ProtectedRoute = ({ redirectPath = '/login' }) => {
   const { isAuthenticated, isLoading } = useAuth();
-
   if (isLoading) {
     return <div>Loading authentication status...</div>;
   }
-
   if (!isAuthenticated) {
     return <Navigate to={redirectPath} replace />;
   }
-
   return <Outlet />;
 };
 

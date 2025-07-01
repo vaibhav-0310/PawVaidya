@@ -29,11 +29,10 @@ function App() {
     setShowChatbot((prev) => !prev);
   };
   return (
-    // Wrap your entire application with AuthProvider to make auth context available
     <BrowserRouter>
       <AuthProvider>
         <ToastContainer />
-        <Navbar /> {/* Consider passing auth state to Navbar for conditional rendering of login/logout buttons */}
+        <Navbar />
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
@@ -43,17 +42,11 @@ function App() {
           <Route path="/blog" element={<Blogs />} />
           <Route path="/essentials" element={<Essentials />} />
           <Route path="/vet" element={<Vet />} />
-          <Route path="/create/blog" element={<CreateBlog />} /> {/* This might also need protection if only logged-in users can create blogs */}
-
-          {/* Protected Routes: Wrap them inside a <Route element={<ProtectedRoute />}> */}
-          {/* Any routes nested here will require authentication */}
+          <Route path="/create/blog" element={<CreateBlog />} /> 
           <Route element={<ProtectedRoute />}>
             <Route path="/cart" element={<Cart />} />
             <Route path="/blog/:blogId" element={<ShowBlog />} />
-            {/* Add any other routes you want to protect here */}
           </Route>
-
-          {/* Catch-all for undefined routes */}
           <Route path="*" element={<Error />} />
         </Routes>
         <button className="chatbot-toggle-button" onClick={toggleChatbot}>

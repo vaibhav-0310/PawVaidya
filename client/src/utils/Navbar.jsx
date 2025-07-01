@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import logo from "../assests/logo.svg";
 import axios from "axios";
 import { useCallback } from "react";
+import { toast } from "react-toastify";
 
 function Navbar() {
   const [user, setUser] = useState({ username: "" });
@@ -11,11 +12,12 @@ const logout = useCallback((e) => {
   e.preventDefault();
   axios.get("/api/logout", { withCredentials: true })
     .then((res) => {
-      alert("user logged out successfully");
+      toast.success("Logged out successfully");
       setUser({ username: "" });
     })
     .catch((err) => {
       console.error("Logout failed:", err);
+      toast.error("Logout failed");
     });
 }, []);
 

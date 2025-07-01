@@ -1,6 +1,6 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios'; // Import Axios
+import axios from 'axios'; 
 
 const AuthContext = createContext(null);
 
@@ -10,14 +10,10 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  // Function to check auth status from backend
   const checkAuthStatus = async () => {
     try {
-      // Use axios.get instead of fetch
-      const response = await axios.get('/api/auth-status'); // Adjust URL if using axios.defaults.baseURL
-      const data = response.data; // Axios puts the response body in .data
-
+      const response = await axios.get('/api/auth-status'); 
+      const data = response.data; 
       if (data.isAuthenticated) {
         setIsAuthenticated(true);
         setUser(data.user);
@@ -27,7 +23,6 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.error('Error fetching auth status:', error);
-      // Handle network errors or server issues
       setIsAuthenticated(false);
       setUser(null);
     } finally {
@@ -38,16 +33,14 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     checkAuthStatus();
   }, []);
-
-  // For login using axios.post
   const login = async (username, password) => {
     try {
       setIsLoading(true);
-      const response = await axios.post('/api/login', { username, password }); // Axios sends data as JSON by default
+      const response = await axios.post('/api/login', { username, password }); 
       const data = response.data;
 
-      if (response.status === 200 && data.success) { // Assuming your login endpoint returns { success: true } on success
-        await checkAuthStatus(); // Re-fetch status to get updated user data
+      if (response.status === 200 && data.success) { 
+        await checkAuthStatus(); 
         return true;
       } else {
         setIsAuthenticated(false);
@@ -58,22 +51,19 @@ export const AuthProvider = ({ children }) => {
       console.error('Login error:', error);
       setIsAuthenticated(false);
       setUser(null);
-      // Axios error handling: error.response contains server response if available
       if (error.response && error.response.data && error.response.data.message) {
-        throw new Error(error.response.data.message); // Throw specific error message from backend
+        throw new Error(error.response.data.message); 
       }
-      throw new Error('An unexpected error occurred during login.'); // Generic error
+      throw new Error('An unexpected error occurred during login.'); 
     } finally {
       setIsLoading(false);
     }
   };
-
-  // For logout using axios.get
   const logout = async () => {
     try {
       setIsLoading(true);
       const response = await axios.get('/api/logout');
-      if (response.status === 200) { // Check for successful status code
+      if (response.status === 200) { 
         setIsAuthenticated(false);
         setUser(null);
       }
