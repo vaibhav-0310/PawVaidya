@@ -10,6 +10,7 @@ function Login() {
     username: "",
     password: "",
   });
+  const [otp, setOtp] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
   const navigate = useNavigate();
   const handleInput = (e) => {
@@ -18,6 +19,10 @@ function Login() {
 
   const handleSendOtp = async (e) => {
     e.preventDefault();
+    if (!form.username || !form.password) {
+      toast.error("Please fill in all fields");
+      return;
+    }
     try {
       const re = await axios.post("/api/send-otp", {
         username: form.username,

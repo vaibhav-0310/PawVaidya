@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import login from "../../assests/login.svg"
-import logo from "../../assests/logo.svg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -23,6 +22,10 @@ function Signup() {
 
   const handleSendOtp = async (e) => {
     e.preventDefault();
+    if(form.password.length < 6) {
+      toast.error("Password must be at least 6 characters long");
+      return;
+    }
     try {
       const re = await axios.post("/api/send-otp", {
         email: form.email,
