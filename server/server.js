@@ -105,18 +105,6 @@ app.use("/api", chat);
 app.use("/api", vet);
 
 
-// Health check endpoint
-app.get('/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date().toISOString() });
-});
-
-
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "Welcome to PawVaidya" });
-});
-
-
-
 app.listen(port, () => {
   console.log(`server started at http://localhost:${port}`);
 });

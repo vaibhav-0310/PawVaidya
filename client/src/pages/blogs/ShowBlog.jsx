@@ -38,7 +38,7 @@ function ShowBlog() {
                     <h4 className="text-muted">Loading your story...</h4>
                     <div className="progress mx-auto mt-3" style={{ width: '200px', height: '4px' }}>
                         <div className="progress-bar progress-bar-striped progress-bar-animated"
-                             style={{ width: '100%' }}></div>
+                             style={{ width: '80%' }}></div>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@ function ShowBlog() {
 
     if (error) {
         return (
-            <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light">
+            <div className="min-vh-100 d-flex align-items-center justify-content-center">
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-12 col-md-6">
@@ -94,7 +94,7 @@ function ShowBlog() {
 
     return (
         <>
-        <div className="bg-light min-vh-100 mt-3">
+        <div className="min-vh-100 mt-3">
             {/* Hero Section */}
             <div className="position-relative overflow-hidden">
                 {blog.image && (

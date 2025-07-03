@@ -69,8 +69,7 @@ function Cart() {
           renderPayPalButton();
         })
         .catch((error) => {
-          console.error("Failed to load PayPal SDK:", error);
-          alert("Failed to load PayPal. Please try again.");
+          toast.error("Failed to load PayPal script");
         });
     }
   }, [showPayPal, cartItems, totalAmount]);
@@ -105,7 +104,7 @@ function Cart() {
               });
 
               if (response.data.success) {
-                alert("Payment completed successfully!");
+                toast.success("Payment completed successfully!");
 
                 await clearCart();
                 setCartItems([]);
@@ -116,19 +115,19 @@ function Cart() {
               }
             } catch (error) {
               console.error("Payment capture error:", error);
-              alert("Payment processing failed. Please try again.");
+              toast.error("Payment processing failed. Please try again.");
             } finally {
               setLoading(false);
             }
           },
           onError: (err) => {
             console.error("PayPal error:", err);
-            alert("Payment failed. Please try again.");
+            toast.error("Payment failed. Please try again.");
             setLoading(false);
           },
           onCancel: (data) => {
             console.log("Payment cancelled:", data);
-            alert("Payment was cancelled.");
+            toast.info("Payment was cancelled.");
             setLoading(false);
           },
         })
@@ -175,11 +174,11 @@ function Cart() {
 
   const proceedToCheckout = () => {
     if (cartItems.length === 0) {
-      alert("Your cart is empty!");
+      toast.error("Your cart is empty!");
       return;
     }
     if (totalAmount <= 0) {
-      alert("Invalid cart total!");
+      toast.error("Invalid cart total!");
       return;
     }
     setShowPayPal(true);

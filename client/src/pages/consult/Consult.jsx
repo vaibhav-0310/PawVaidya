@@ -21,10 +21,9 @@ function Consult() {
     }, []);
     return (<>
         {consultation ? (
-            <div>
-                <h2>Consultation Details</h2>
+            <div className="consultation-details text-center mt-4">
+                <h2>Chat with {consultation.name}</h2>
                 <p>ID: {consultation._id}</p>
-                <p>Pet Name: {consultation.name}</p>
                 <p>Post: {consultation.post}</p>
             </div>
         ) : (
