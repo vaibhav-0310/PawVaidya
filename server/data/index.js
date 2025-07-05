@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import Essential from '../schema/essentail.schema.js';
-import essentialsData from './data.js'; 
+import Blogs from '../schema/blogs.schema.js';
+import Blog from './blog.js'; 
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -17,8 +17,8 @@ const connect = async () => {
 };
 const pushEssentials = async (essentialsArray) => {
   try {
-    await Essential.deleteMany({}); // Clear existing essentials
-    await Essential.insertMany(essentialsArray);
+    await Blogs.deleteMany({}); 
+    await Blogs.insertMany(essentialsArray);
     console.log("All essential items saved successfully");
   } catch (error) {
     console.error("Error saving essential items:", error);
@@ -26,7 +26,7 @@ const pushEssentials = async (essentialsArray) => {
 };
 
 connect()
-  .then(() => pushEssentials(essentialsData))
+  .then(() => pushEssentials(Blog))
   .catch((err) => {
     console.error("Failed to push essentials:", err);
   });
