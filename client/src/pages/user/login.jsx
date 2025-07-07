@@ -17,6 +17,9 @@ function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleToast=()=>{
+    toast.success("Sending OTP");
+  }
     const handleGoogleLogin = () => {
      window.location.href = '/api/auth/google';
      toast.info('Redirecting to Google login...');

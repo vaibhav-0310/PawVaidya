@@ -18,6 +18,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Chatbot from "./utils/Chatbot";
 import Consult from "./pages/consult/Consult";
+import Items from "./pages/items/Items";
 
 // Import AuthProvider and ProtectedRoute
 import { AuthProvider } from './context/AuthContext';
@@ -48,6 +49,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/blog/:blogId" element={<ShowBlog />} />
             <Route path="/consult/:id" element={<Consult />} />
+            <Route path="/items/:id" element={<Items />} />
           </Route>
           <Route path="*" element={<Error />} />
         </Routes>
