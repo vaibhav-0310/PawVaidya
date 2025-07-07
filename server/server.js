@@ -18,7 +18,6 @@ import cart from "./routes/cart.route.js";
 import chat from "./routes/chat.route.js";
 import vet from "./routes/vet.routes.js";
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20'; 
-
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 const app = express();
@@ -77,8 +76,6 @@ passport.deserializeUser(async (serializedUser, done) => {
     done(error, null);
   }
 });
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 const connect = async () => {
   await mongoose.connect(process.env.MONGO_URL);
