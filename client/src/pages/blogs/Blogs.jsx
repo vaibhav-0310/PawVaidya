@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Footer from "../../utils/footer.jsx";
-import Container from './container.jsx';
-import Card from './card.jsx';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import Container from "./container.jsx";
+import Card from "./card.jsx";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Blogs() {
   let [blogs, setBlogs] = useState([]);
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top when this component mounts/updates
+  }, []);
 
   useEffect(() => {
-    axios.get("/api/blog")
+    axios
+      .get("/api/blog")
       .then((res) => {
         setBlogs(res.data);
       })
@@ -25,7 +29,10 @@ function Blogs() {
         <div className="row justify-content-start">
           {blogs.map((item) => (
             <div className=" col-md-4  mb-4" key={item._id}>
-              <Link to={`/blog/${item._id}`} className="text-decoration-none text-dark d-block h-100">
+              <Link
+                to={`/blog/${item._id}`}
+                className="text-decoration-none text-dark d-block h-100"
+              >
                 <Card
                   title={item.title}
                   image={item.image}

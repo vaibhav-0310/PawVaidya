@@ -10,6 +10,10 @@ function Phr() {
   const [isUploading, setIsUploading] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, []);
+
   const onFileChange = (e) => {
     setFile(e.target.files[0]);
     setMessage(""); 

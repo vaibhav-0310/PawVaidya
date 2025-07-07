@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 function Cart() {
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, []);
   const [cartItems, setCartItems] = useState([]);
   const [showPayPal, setShowPayPal] = useState(false);
   const [totalAmount, setTotalAmount] = useState(0);

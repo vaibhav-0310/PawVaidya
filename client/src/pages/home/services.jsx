@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 function Services() {
     const navigate = useNavigate();
     const handleBookNow = () => {
-       navigate("/vet");
+       navigate("consult/686456aae0bdd06742a44e02");
     }
     return (
         <div className="container mt-5 service">
