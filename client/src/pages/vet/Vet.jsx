@@ -35,11 +35,11 @@ function Vet() {
           {data.map((item, index) => (
             <div className="col-lg-4 col-md-6 col-sm-12 mb-4" key={index}>
               <Link
-                to={`/consult/${item._id}`}
+                to={`/chat/${item._id}`}
                 className="text-decoration-none d-block h-100"
               >
                 <div className="h-100">
-                  <Team name={item.name} image={item.image} post={item.post} />
+                  <Team name={item.name} image={item.image} post={item.post} _id={item._id} />
                 </div>
               </Link>
             </div>

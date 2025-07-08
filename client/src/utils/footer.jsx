@@ -47,8 +47,6 @@ function Footer() {
                         </li>
                     </ul>
                 </div>
-
-                {/* Contact Us Section */}
                 <div className="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
                     <h5 className="mb-3">Contact Us</h5>
                     <ul className="list-unstyled">
@@ -86,8 +84,6 @@ function Footer() {
 
                 <div className="col-lg-2 d-none d-lg-block"></div>
             </div>
-
-            {/* Copyright Section */}
             <div className="row mt-4 pt-4 ">
                 <div className="col-12 start">
                     <p className="mb-0">&copy; 2025 PawVadiya. All rights reserved.</p>

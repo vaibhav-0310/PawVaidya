@@ -20,8 +20,20 @@ import vet from "./routes/vet.routes.js";
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20'; 
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+import Chat from './schema/chat.schema.js';
+
 const app = express();
 const port = process.env.PORT;
+const server = createServer(app);
+
+// Socket.IO setup
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    credentials: true
+  }
+});
+
 //middleware
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.urlencoded({ extended: true , limit: "50mb"}));
@@ -101,7 +113,76 @@ app.use("/api", cart);
 app.use("/api", chat);
 app.use("/api", vet);
 
+// Socket.IO connection handling
+io.on('connection', (socket) => {
+  console.log('User connected:', socket.id);
 
-app.listen(port, () => {
+  // Join chat room
+  socket.on('join-chat', (chatId) => {
+    socket.join(chatId);
+    console.log(`User joined chat room: ${chatId}`);
+  });
+
+  // Handle sending messages
+  socket.on('send-message', async (data) => {
+    try {
+      const { chatId, senderId, senderType, content } = data;
+      
+      // Find or create chat
+      let chat = await Chat.findById(chatId);
+      if (!chat) {
+        return socket.emit('error', 'Chat not found');
+      }
+
+      // Add message to chat
+      const newMessage = {
+        sender: senderId,
+        senderType: senderType,
+        content: content,
+        timestamp: new Date(),
+        read: false
+      };
+
+      chat.messages.push(newMessage);
+      chat.lastMessage = new Date();
+      await chat.save();
+
+      // Emit message to all users in the chat room
+      io.to(chatId).emit('receive-message', {
+        messageId: newMessage._id,
+        sender: senderId,
+        senderType: senderType,
+        content: content,
+        timestamp: newMessage.timestamp
+      });
+
+    } catch (error) {
+      console.error('Error sending message:', error);
+      socket.emit('error', 'Failed to send message');
+    }
+  });
+
+  // Handle message read status
+  socket.on('mark-read', async (data) => {
+    try {
+      const { chatId, messageId } = data;
+      
+      await Chat.findOneAndUpdate(
+        { _id: chatId, 'messages._id': messageId },
+        { $set: { 'messages.$.read': true } }
+      );
+
+      socket.to(chatId).emit('message-read', { messageId });
+    } catch (error) {
+      console.error('Error marking message as read:', error);
+    }
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected:', socket.id);
+  });
+});
+
+server.listen(port, () => {
   console.log(`server started at http://localhost:${port}`);
 });

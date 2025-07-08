@@ -1,7 +1,8 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, MessageCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-function Team({ name, image, post }) {
+function Team({ name, image, post, _id }) {
   return (
     <div className="w-100">
       <div
@@ -27,17 +28,32 @@ function Team({ name, image, post }) {
               {post}
             </p>
           </div>
-          <div
-            className="d-flex align-items-center justify-content-center rounded-circle"
-            style={{
-              width: '36px',
-              height: '36px',
-              backgroundColor: '#f0e6fc',
-              color: '#7b2cbf',
-              cursor: 'pointer',
-            }}
-          >
-            <ArrowRight size={18} />
+          <div className="d-flex gap-2">
+            <Link
+              to={`/chat/${_id}`}
+              className="d-flex align-items-center justify-content-center rounded-circle text-decoration-none"
+              style={{
+                width: '36px',
+                height: '36px',
+                backgroundColor: '#e6f3ff',
+                color: '#0066cc',
+              }}
+              title="Chat with doctor"
+            >
+              <MessageCircle size={18} />
+            </Link>
+            <div
+              className="d-flex align-items-center justify-content-center rounded-circle"
+              style={{
+                width: '36px',
+                height: '36px',
+                backgroundColor: '#f0e6fc',
+                color: '#7b2cbf',
+                cursor: 'pointer',
+              }}
+            >
+              <ArrowRight size={18} />
+            </div>
           </div>
         </div>
       </div>
