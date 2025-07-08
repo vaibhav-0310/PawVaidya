@@ -8,7 +8,7 @@ function Services() {
        navigate("consult/686456aae0bdd06742a44e02");
     }
     return (
-        <div className="container mt-5 service">
+        <div className="container mt-5 service mb-5">
             <h3 className="text-center mb-5">Veterinary services tailored for your pet’s needs</h3>
             <div className="row text-center">
                 <div className="col-md-4 mb-4">

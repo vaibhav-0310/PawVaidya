@@ -5,8 +5,6 @@ import nodemailer from "nodemailer";
 
 const router = express.Router();
 
-
-
 const otpMap = new Map();
 
 router.post("/send-otp", async (req, res) => {

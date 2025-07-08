@@ -170,8 +170,9 @@ body {
     top: 100px;
   }
   .footer-container {
-    width: 100% !important;
-    padding: 10px !important;
+    width: 95% !important;
+    border-radius: 20px;
+    padding: 30px 15px 15px 15px !important;
   }
   .navbar-all {
     padding: 0px 10px 0px 10px !important;
@@ -182,6 +183,9 @@ body {
   }
   .navbar .dropdown-menu {
     z-index: 1050;
+  }
+  .image-container-home{
+    display: none;
   }
 }
 
@@ -674,3 +678,4 @@ body {
   border: none;
   border-left: 4px solid #2196f3;
 }
+
