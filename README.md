@@ -22,6 +22,7 @@ We are currently working on the core feature including  appointment scheduling.
 - 📈 Health tracking dashboards  
 - 📂 Upload medical documents and lab reports  
 - 🔔 Notifications for vaccinations and checkups
+- 📧 Realtime ChatBot for pet healthcare management
 
 ---
 
@@ -78,9 +79,19 @@ npm start
 
 ![image](https://github.com/user-attachments/assets/86226ac3-0c2c-4369-899e-feea4d7cf1f3)
 
-![image](https://github.com/user-attachments/assets/bab419ce-023a-49d6-bba7-7f0838e7d376)
+![image](https://github.com/user-attachments/assets/76d5ec2e-2555-46ed-b267-b516654b8e67)
 
-![image](https://github.com/user-attachments/assets/e96a79e3-b431-412f-b1b6-da6375a0820b)
+![image](https://github.com/user-attachments/assets/ea2cd8dd-2e2d-4e98-886f-e2c844805d16)
+
+![image](https://github.com/user-attachments/assets/3046fbbf-afce-4ad9-bad2-326d7cf3999d)
+
+![image](https://github.com/user-attachments/assets/c983fc1c-1be2-4780-b35d-d7058b7dbf29)
+
+
+![image](https://github.com/user-attachments/assets/d5de2d88-839c-4501-afe1-78bfbdef351a)
+
+![image](https://github.com/user-attachments/assets/bb790ef9-4efd-4b4c-a808-3bb90fc4e6e6)
+
 
 ---
 
