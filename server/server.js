@@ -21,10 +21,15 @@ import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import Chat from './schema/chat.schema.js';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const app = express();
 const port = process.env.PORT;
 const server = createServer(app);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Socket.IO setup
 const io = new Server(server, {
@@ -182,6 +187,18 @@ io.on('connection', (socket) => {
     console.log('User disconnected:', socket.id);
   });
 });
+
+const distPath = path.join(__dirname, 'dist');
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+
+  const indexPath = path.join(distPath, 'index.html');
+  if (fs.existsSync(indexPath)) {
+    app.get(/^\/(?!api).*/, (req, res) => {
+      res.sendFile(indexPath);
+    });
+  }
+}
 
 server.listen(port, () => {
   console.log(`server started at http://localhost:${port}`);

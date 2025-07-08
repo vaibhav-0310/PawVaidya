@@ -115,7 +115,7 @@ router.get("/auth/google", passport.authenticate("google", { scope: ["profile", 
 router.get(
   "/auth/google/callback",
   passport.authenticate('google', { 
-    failureRedirect: 'http://localhost:3000/login',
+    failureRedirect: 'http://localhost:8080/login',
     session: true, 
   }),
   async (req, res) => {
@@ -137,13 +137,13 @@ router.get(
       req.login(user, (err) => {
         if (err) {
           console.error("Login error:", err);
-          return res.redirect('http://localhost:3000/login');
+          return res.redirect('http://localhost:8080/login');
         }
-        res.redirect('http://localhost:3000');
+        res.redirect('http://localhost:8080');
       });
     } catch (error) {
       console.error("Google callback error:", error);
-      res.redirect('http://localhost:3000/login');
+      res.redirect('http://localhost:8080/login');
     }
   }
 );
