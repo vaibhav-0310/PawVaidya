@@ -125,7 +125,7 @@ function Phr() {
 
   return (
     <>
-      <div className="min-vh-100" >
+      <div className="min-vh-100" style={{ backgroundColor: '#fff0f5' }}>
         <div className="container py-5">
           <div className="row mb-5">
             <div className="col-12">
@@ -145,14 +145,20 @@ function Phr() {
 
           <div className="row justify-content-center mb-5">
             <div className="col-lg-8">
-              <div className="card shadow-lg border-0 rounded-4">
-                <div className="card-header bg-primary text-white text-center py-4 rounded-top-4">
+              <div className="card shadow-lg border-0 rounded-4" style={{ backgroundColor: '#ffffff' }}>
+                <div 
+                  className="card-header text-white text-center py-4 rounded-top-4"
+                  style={{ 
+                    background: 'linear-gradient(135deg, #ff6b9d, #ff8fab)',
+                    border: 'none'
+                  }}
+                >
                   <h3 className="mb-0 fw-semibold">
                     <i className="fas fa-cloud-upload-alt me-2"></i>
                     Upload New PHR File
                   </h3>
                 </div>
-                <div className="card-body p-5">
+                <div className="card-body p-5" style={{ backgroundColor: '#fef7f7' }}>
                   <form onSubmit={onSubmit}>
                     <div className="mb-4">
                       <label className="form-label fw-semibold text-dark mb-3">
@@ -165,8 +171,9 @@ function Phr() {
                         value={title}
                         onChange={onTitleChange}
                         style={{
-                          border: title.trim() ? "2px solid #28a745" : "2px solid #dee2e6",
+                          border: title.trim() ? "2px solid #ff6b9d" : "2px solid #dee2e6",
                           fontSize: "1rem",
+                          backgroundColor: '#ffffff'
                         }}
                       />
                       
@@ -187,14 +194,15 @@ function Phr() {
                             paddingTop: "10px",
                             fontSize: "1rem",
                             border: file
-                              ? "2px solid #28a745"
+                              ? "2px solid #ff6b9d"
                               : "2px dashed #dee2e6",
+                            backgroundColor: '#ffffff'
                           }}
                         />
 
                         {file && (
-                          <div className="mt-3 p-3 bg-light rounded-3">
-                            <small className="text-success fw-semibold">
+                          <div className="mt-3 p-3 rounded-3" style={{ backgroundColor: '#ffffff', border: '1px solid #ff6b9d' }}>
+                            <small className="fw-semibold" style={{ color: '#ff6b9d' }}>
                               <i className="fas fa-check-circle me-1"></i>
                               Selected: {file.name}
                             </small>
@@ -210,9 +218,9 @@ function Phr() {
                         disabled={isUploading || !file || !title.trim()}
                         style={{
                           background:
-                            "linear-gradient(45deg, #007bff, #0056b3)",
+                            "linear-gradient(135deg, #ff6b9d, #ff8fab)",
                           border: "none",
-                          boxShadow: "0 4px 15px rgba(0, 123, 255, 0.3)",
+                          boxShadow: "0 4px 15px rgba(255, 107, 157, 0.2)",
                         }}
                       >
                         {isUploading ? (
@@ -259,11 +267,12 @@ function Phr() {
 
           <div className="row">
             <div className="col-12">
-              <div className="card shadow-lg border-0 rounded-4">
+              <div className="card shadow-lg border-0 rounded-4" style={{ backgroundColor: '#ffffff' }}>
                 <div
-                  className="card-header bg-gradient text-white py-4 rounded-top-4"
+                  className="card-header text-white py-4 rounded-top-4"
                   style={{
-                    background: "linear-gradient(45deg, #6c757d, #495057)",
+                    background: "linear-gradient(135deg, #ff6b9d, #ff8fab)",
+                    border: "none"
                   }}
                 >
                   <div className="d-flex justify-content-between align-items-center">
@@ -271,18 +280,18 @@ function Phr() {
                       <i className="fas fa-folder-open me-2"></i>
                       Your Uploaded Files
                     </h3>
-                    <span className="badge bg-light text-dark fs-6 px-3 py-2 rounded-pill">
+                    <span className="badge text-dark fs-6 px-3 py-2 rounded-pill" style={{ backgroundColor: '#fef7f7', border: '1px solid #ff6b9d' }}>
                       {phrList.length} files
                     </span>
                   </div>
                 </div>
 
-                <div className="card-body p-0">
+                <div className="card-body p-0" style={{ backgroundColor: '#fef7f7' }}>
                   {isLoading ? (
                     <div className="text-center py-5">
                       <div
-                        className="spinner-border text-primary mb-3"
-                        style={{ width: "3rem", height: "3rem" }}
+                        className="spinner-border mb-3"
+                        style={{ width: "3rem", height: "3rem", color: "#ff6b9d" }}
                       ></div>
                       <p className="text-muted">Loading your files...</p>
                     </div>
@@ -301,30 +310,30 @@ function Phr() {
                     </div>
                   ) : (
                     <div className="table-responsive">
-                      <table className="table table-hover mb-0">
-                        <thead className="table-light">
+                      <table className="table table-hover mb-0" style={{ backgroundColor: '#ffffff' }}>
+                        <thead style={{ backgroundColor: '#fef7f7' }}>
                           <tr>
                             <th
-                              className="border-0 py-3 ps-4"
-                              style={{ fontWeight: "600" }}
+                              className="border-0 py-4 ps-4"
+                              style={{ fontWeight: "600", color: '#ff6b9d' }}
                             >
                               #
                             </th>
                             <th
                               className="border-0 py-3"
-                              style={{ fontWeight: "600" }}
+                              style={{ fontWeight: "600", color: '#ff6b9d' }}
                             >
                               Document
                             </th>
                             <th
-                              className="border-0 py-3"
-                              style={{ fontWeight: "600" }}
+                              className="border-0 py-4"
+                              style={{ fontWeight: "600", color: '#ff6b9d' }}
                             >
                               Uploaded
                             </th>
                             <th
-                              className="border-0 py-3 text-center"
-                              style={{ fontWeight: "600" }}
+                              className="border-0 py-4 text-center"
+                              style={{ fontWeight: "600", color: '#ff6b9d' }}
                             >
                               Actions
                             </th>
@@ -332,9 +341,9 @@ function Phr() {
                         </thead>
                         <tbody>
                           {phrList.map((file, index) => (
-                            <tr key={file._id} className="border-bottom">
+                            <tr key={file._id} className="border-bottom" style={{ backgroundColor: '#ffffff' }}>
                               <td className="py-4 ps-4 align-middle">
-                                <span className="badge bg-primary rounded-pill px-3 py-2">
+                                <span className="badge rounded-pill px-3 py-2" style={{ backgroundColor: '#ff6b9d', color: 'white' }}>
                                   {index + 1}
                                 </span>
                               </td>
@@ -342,7 +351,7 @@ function Phr() {
                                 <div className="d-flex align-items-center">
                                   <span
                                     className="me-3"
-                                    style={{ fontSize: "1.5rem" }}
+                                    style={{ fontSize: "1.5rem", color: "#ff6b9d" }}
                                   >
                                     {getFileIcon(file.name)}
                                   </span>
@@ -376,8 +385,12 @@ function Phr() {
                                     href={file.name}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="btn btn-outline-primary btn-sm rounded-3 me-2"
-                                    style={{ minWidth: "80px" }}
+                                    className="btn btn-sm rounded-3 me-2 text-white"
+                                    style={{ 
+                                      minWidth: "80px",
+                                      backgroundColor: "#ff6b9d",
+                                      border: "none"
+                                    }}
                                   >
                                     <i className="fas fa-eye me-1"></i>
                                     View

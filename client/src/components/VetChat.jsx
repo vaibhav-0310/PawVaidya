@@ -17,6 +17,8 @@ const VetChat = () => {
     const messagesEndRef = useRef(null);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+        
         // Check if user is authenticated
         if (!isAuthenticated || !user) {
             setError('Please login to access chat');
@@ -67,10 +69,6 @@ const VetChat = () => {
             }
         };
     }, [socket, chat]);
-
-    useEffect(() => {
-        scrollToBottom();
-    }, [messages]);
 
     const initializeChat = async () => {
         try {
@@ -126,11 +124,18 @@ const VetChat = () => {
 
     if (loading) {
         return (
-            <div className="container mt-5">
+            <div 
+                className="d-flex justify-content-center align-items-center" 
+                style={{ 
+                    minHeight: '100vh', 
+                    backgroundColor: '#fff0f5'
+                }}
+            >
                 <div className="text-center">
-                    <div className="spinner-border" role="status">
+                    <div className="spinner-border text-primary" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </div>
+                    <p className="mt-3 text-muted">Loading chat...</p>
                 </div>
             </div>
         );
@@ -138,111 +143,160 @@ const VetChat = () => {
 
     if (error) {
         return (
-            <div className="container mt-5">
-                <div className="alert alert-danger" role="alert">
-                    {error}
+            <div 
+                className="d-flex justify-content-center align-items-center" 
+                style={{ 
+                    minHeight: '100vh', 
+                    backgroundColor: '#fff0f5',
+                    padding: '20px'
+                }}
+            >
+                <div className="alert alert-danger shadow-sm" role="alert" style={{ maxWidth: '500px' }}>
+                    <h4 className="alert-heading">Oops!</h4>
+                    <p className="mb-0">{error}</p>
                 </div>
             </div>
         );
     }
 
     return (
-        <>
-        <div className="container mt-4 mb-5">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card shadow">
+        <div 
+            className="d-flex flex-column" 
+            style={{ 
+                minHeight: '100vh', 
+                backgroundColor: '#fff0f5'
+            }}
+        >
+            {/* Main Chat Container */}
+            <div className="flex-grow-1 d-flex align-items-center justify-content-center p-3">
+                <div className="w-100" style={{ maxWidth: '900px' }}>
+                    <div className="card shadow-lg border-0" style={{ backgroundColor: '#ffffff' }}>
                         {/* Chat Header */}
-                        <div className="card-header bg-primary text-white">
+                        <div 
+                            className="card-header text-white" 
+                            style={{ 
+                                background: 'linear-gradient(135deg, #ff6b9d, #ff8fab)',
+                                borderRadius: '0.5rem 0.5rem 0 0'
+                            }}
+                        >
                             <div className="d-flex align-items-center">
                                 {chat?.vet?.image && (
                                     <img
                                         src={chat.vet.image}
                                         alt={chat.vet.name}
-                                        className="rounded-circle me-3"
-                                        style={{ width: '40px', height: '40px', objectFit: 'cover' }}
+                                        className="rounded-circle me-3 border border-white"
+                                        style={{ 
+                                            width: '50px', 
+                                            height: '50px', 
+                                            objectFit: 'cover',
+                                            borderWidth: '2px !important'
+                                        }}
                                     />
                                 )}
                                 <div>
-                                    <h5 className="mb-0">{chat?.vet?.name}</h5>
-                                    <small className="text-light">{chat?.vet?.post}</small>
+                                    <h4 className="mb-0 fw-bold">{chat?.vet?.name}</h4>
+                                    <small className="text-light opacity-75">{chat?.vet?.post}</small>
                                 </div>
                             </div>
                         </div>
 
                         {/* Messages Area */}
                         <div 
-                            className="card-body"
+                            className="card-body p-0"
                             style={{ 
-                                height: '400px', 
+                                height: '60vh', 
                                 overflowY: 'auto',
-                                backgroundColor: '#f8f9fa'
+                                backgroundColor: '#fef7f7'
                             }}
                         >
-                            {messages.length === 0 ? (
-                                <div className="text-center text-muted">
-                                    <p>No messages yet. Start the conversation!</p>
-                                </div>
-                            ) : (
-                                messages.map((message, index) => (
-                                    <div
-                                        key={index}
-                                        className={`mb-3 d-flex ${
-                                            message.senderType === 'user' ? 'justify-content-end' : 'justify-content-start'
-                                        }`}
-                                    >
-                                        <div
-                                            className={`p-3 rounded-3 ${
-                                                message.senderType === 'user'
-                                                    ? 'bg-primary text-white'
-                                                    : 'bg-white border'
-                                            }`}
-                                            style={{ maxWidth: '70%' }}
-                                        >
-                                            <p className="mb-1">{message.content}</p>
-                                            <small className={`${
-                                                message.senderType === 'user' ? 'text-light' : 'text-muted'
-                                            }`}>
-                                                {new Date(message.timestamp).toLocaleTimeString()}
-                                                {message.senderType === 'user' && message.read && (
-                                                    <span className="ms-2">✓✓</span>
-                                                )}
-                                            </small>
+                            <div className="p-4">
+                                {messages.length === 0 ? (
+                                    <div className="text-center text-muted d-flex flex-column align-items-center justify-content-center h-100">
+                                        <div className="mb-3">
+                                            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                            </svg>
                                         </div>
+                                        <p className="fs-5 mb-2">No messages yet</p>
+                                        <p className="text-muted">Start the conversation with Dr. {chat?.vet?.name}!</p>
                                     </div>
-                                ))
-                            )}
-                            <div ref={messagesEndRef} />
+                                ) : (
+                                    messages.map((message, index) => (
+                                        <div
+                                            key={index}
+                                            className={`mb-3 d-flex ${
+                                                message.senderType === 'user' ? 'justify-content-end' : 'justify-content-start'
+                                            }`}
+                                        >
+                                            <div
+                                                className={`p-3 rounded-4 shadow-sm ${
+                                                    message.senderType === 'user'
+                                                        ? 'text-white'
+                                                        : 'border'
+                                                }`}
+                                                style={{ 
+                                                    maxWidth: '70%',
+                                                    backgroundColor: message.senderType === 'user' ? '#ff6b9d' : '#ffffff'
+                                                }}
+                                            >
+                                                <p className="mb-1">{message.content}</p>
+                                                <small className={`${
+                                                    message.senderType === 'user' ? 'text-light' : 'text-muted'
+                                                }`}>
+                                                    {new Date(message.timestamp).toLocaleTimeString()}
+                                                    {message.senderType === 'user' && message.read && (
+                                                        <span className="ms-2">✓✓</span>
+                                                    )}
+                                                </small>
+                                            </div>
+                                        </div>
+                                    ))
+                                )}
+                                <div ref={messagesEndRef} />
+                            </div>
                         </div>
 
                         {/* Message Input */}
-                        <div className="card-footer">
+                        <div className="card-footer border-0" style={{ backgroundColor: '#ffffff' }}>
                             <div className="input-group">
                                 <textarea
-                                    className="form-control"
+                                    className="form-control border-0 shadow-sm"
                                     placeholder="Type your message..."
                                     value={newMessage}
                                     onChange={(e) => setNewMessage(e.target.value)}
                                     onKeyPress={handleKeyPress}
                                     rows="2"
-                                    style={{ resize: 'none' }}
+                                    style={{ 
+                                        resize: 'none',
+                                        backgroundColor: '#fef7f7',
+                                        borderRadius: '1rem 0 0 1rem'
+                                    }}
                                 />
                                 <button
-                                    className="btn btn-primary"
+                                    className="btn text-white px-4"
                                     type="button"
                                     onClick={sendMessage}
                                     disabled={!newMessage.trim()}
+                                    style={{ 
+                                        background: 'linear-gradient(135deg, #ff6b9d, #ff8fab)',
+                                        borderRadius: '0 1rem 1rem 0',
+                                        border: 'none'
+                                    }}
                                 >
-                                    Send
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                                        <polygon points="22,2 15,22 11,13 2,9 22,2"></polygon>
+                                    </svg>
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            {/* Footer */}
+            <Footer />
         </div>
-        <Footer />
-        </>
     );
 };
 
