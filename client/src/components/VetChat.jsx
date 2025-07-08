@@ -27,7 +27,7 @@ const VetChat = () => {
         }
 
         // Initialize socket connection
-        const socketInstance = io('http://localhost:8080');
+        const socketInstance = io('https://pawvaidya-vbdx.onrender.com/');
         setSocket(socketInstance);
 
         // Initialize chat
