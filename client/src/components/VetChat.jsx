@@ -222,7 +222,7 @@ const VetChat = () => {
                         </div>
 
                         <div className="card-footer border-0" style={{ backgroundColor: '#ffffff' }}>
-                            <div className="input-group align-items-end">
+                            <div className="input-group align-items-stretch">
                                 <textarea
                                     className="form-control border-0 shadow-sm"
                                     placeholder="Type your message..."
@@ -233,33 +233,58 @@ const VetChat = () => {
                                     style={{
                                         resize: 'none',
                                         backgroundColor: '#fef7f7',
-                                        borderRadius: '1rem 0 0 1rem'
+                                        borderRadius: '1rem 0 0 1rem',
+                                        minHeight: '60px'
                                     }}
                                 />
                                 <button
-                                    className={`btn px-3 ${isListening ? 'btn-danger' : 'btn-secondary'}`}
+                                    className="btn px-3 shadow-sm d-flex align-items-center justify-content-center"
                                     type="button"
                                     onClick={toggleListening}
-                                    style={{ borderRadius: '0' }}
+                                    style={{
+                                        background: isListening 
+                                            ? 'linear-gradient(135deg, #dc3545, #c82333)' 
+                                            : 'linear-gradient(135deg, #f8f9fa, #e9ecef)',
+                                        color: isListening ? '#ffffff' : '#6c757d',
+                                        border: '1px solid #dee2e6',
+                                        borderRadius: '0',
+                                        borderLeft: 'none',
+                                        borderRight: 'none',
+                                        minHeight: '60px',
+                                        transition: 'all 0.3s ease'
+                                    }}
                                     title={isListening ? 'Stop voice input' : 'Start voice input'}
                                 >
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M12 1v10" />
-                                        <circle cx="12" cy="14" r="3" />
-                                        <path d="M19 14v-1a7 7 0 0 0-14 0v1" />
-                                        <line x1="12" y1="17" x2="12" y2="23" />
-                                        <line x1="8" y1="23" x2="16" y2="23" />
+                                        {isListening ? (
+                                            <rect x="6" y="4" width="4" height="16" rx="2"/>
+                                        ) : (
+                                            <>
+                                                <path d="M12 1v10" />
+                                                <circle cx="12" cy="14" r="3" />
+                                                <path d="M19 14v-1a7 7 0 0 0-14 0v1" />
+                                                <line x1="12" y1="17" x2="12" y2="23" />
+                                                <line x1="8" y1="23" x2="16" y2="23" />
+                                            </>
+                                        )}
                                     </svg>
                                 </button>
                                 <button
-                                    className="btn text-white px-4"
+                                    className="btn text-white px-4 shadow-sm d-flex align-items-center justify-content-center"
                                     type="button"
                                     onClick={sendMessage}
                                     disabled={!newMessage.trim()}
                                     style={{
-                                        background: 'linear-gradient(135deg, #ff6b9d, #ff8fab)',
+                                        background: !newMessage.trim() 
+                                            ? 'linear-gradient(135deg, #d6d6d6, #c0c0c0)' 
+                                            : 'linear-gradient(135deg, #ff6b9d, #ff8fab)',
                                         borderRadius: '0 1rem 1rem 0',
-                                        border: 'none'
+                                        border: '1px solid #dee2e6',
+                                        borderLeft: 'none',
+                                        minHeight: '60px',
+                                        transition: 'all 0.3s ease',
+                                        opacity: !newMessage.trim() ? 0.7 : 1,
+                                        cursor: !newMessage.trim() ? 'not-allowed' : 'pointer'
                                     }}
                                 >
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
