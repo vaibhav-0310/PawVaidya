@@ -120,12 +120,12 @@ app.use("/api", vet);
 
 // Socket.IO connection handling
 io.on('connection', (socket) => {
-  console.log('User connected:', socket.id);
+  
 
   // Join chat room
   socket.on('join-chat', (chatId) => {
     socket.join(chatId);
-    console.log(`User joined chat room: ${chatId}`);
+    
   });
 
   // Handle sending messages
@@ -184,7 +184,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    console.log('User disconnected:', socket.id);
+   
   });
 });
 
