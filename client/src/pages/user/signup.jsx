@@ -3,6 +3,7 @@ import login from "../../assests/login.svg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Footer from "../../utils/footer.jsx";
 
 function Signup() {
   const [form, setForm] = useState({
@@ -212,6 +213,7 @@ function Signup() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
