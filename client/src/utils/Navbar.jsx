@@ -89,6 +89,11 @@ const logout = useCallback((e) => {
                   Patient PHR
                 </Link>
               </li>
+               <li className="nav-item">
+                <Link className="nav-link" to="/parser">
+                  Q&A
+                </Link>
+              </li>
             </ul>
             <div className="navbar-nav">
               {user.username ? (

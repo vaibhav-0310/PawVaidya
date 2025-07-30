@@ -18,6 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Chatbot from "./utils/Chatbot";
 import Items from "./pages/items/Items";
 import VetChat from "./components/VetChat";
+import Parser from "./components/Praser";
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoutes';
 
@@ -42,8 +43,10 @@ function App() {
           <Route path="/essentials" element={<Essentials />} />
           <Route path="/vet" element={<Vet />} />
           <Route path="/create/blog" element={<CreateBlog />} /> 
+          
           <Route element={<ProtectedRoute />}>
             <Route path="/cart" element={<Cart />} />
+            <Route path="/parser" element={<Parser />} />
             <Route path="/blog/:blogId" element={<ShowBlog />} />
             <Route path="/items/:id" element={<Items />} />
             <Route path="/chat/:vetId" element={<VetChat />} />

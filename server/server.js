@@ -17,6 +17,7 @@ import payment from "./routes/payment.route.js";
 import cart from "./routes/cart.route.js";
 import chat from "./routes/chat.route.js";
 import vet from "./routes/vet.routes.js";
+import par from "./routes/parser.routes.js";
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20'; 
 import { createServer } from 'http';
 import { Server } from 'socket.io';
@@ -117,6 +118,7 @@ app.use("/api/paypal", payment);
 app.use("/api", cart);
 app.use("/api", chat);
 app.use("/api", vet);
+app.use("/api", par);
 
 // Socket.IO connection handling
 io.on('connection', (socket) => {
