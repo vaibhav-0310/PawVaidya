@@ -48,7 +48,7 @@ function Parser() {
   return (
     <>
       <div className="min-vh-100" style={{ backgroundColor: '#fff0f5' }}>
-        <div className="container py-5">
+        <div className="container py-5">  
           <div className="row mb-5">
             <div className="col-12">
               <div className="text-center mb-4">
@@ -56,7 +56,7 @@ function Parser() {
                 <br />
                 <br />
                 <span style={{ fontSize: "50px", fontWeight: "bold" }}>
-                  PDF Q&A with <span className="back">PawVaidya</span>
+                  Chat with Paw<span className="back">Vaidya</span>
                 </span>
                 <br />
                 <br />
@@ -163,6 +163,12 @@ function Parser() {
                           fontSize: "1rem",
                           border: "2px solid #dee2e6",
                           backgroundColor: '#ffffff'
+                        }}
+                        on KeyPress={e => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault();
+                            askQuestion();
+                          }
                         }}
                       />
                       <button
