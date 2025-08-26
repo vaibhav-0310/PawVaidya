@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 function Blogs() {
   let [blogs, setBlogs] = useState([]);
   useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to top when this component mounts/updates
+    window.scrollTo(0, 0); 
   }, []);
 
   useEffect(() => {

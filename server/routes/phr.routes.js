@@ -88,4 +88,38 @@ router.get('/user/phrs', isLoggedIn, async (req, res) => {
     });
   }
 });
+
+router.delete('/phr/:id', isLoggedIn, async (req, res) => {
+  try {
+    const phrId = req.params.id;
+    const userId = req.user._id;
+
+    const phrToDelete = await phr.findOne({ _id: phrId, userId });
+
+    if (!phrToDelete) {
+      return res.status(404).json({ 
+        error: 'PHR not found', 
+        message: 'The requested PHR file does not exist.' 
+      });
+    }
+
+    await phrToDelete.remove();
+
+    const user = await User.findById(userId);
+    user.phr = user.phr.filter(id => id.toString() !== phrId);
+    await user.save();
+
+    res.json({ 
+      success: true, 
+      message: 'PHR file deleted successfully!' 
+    });
+  } catch (err) {
+    console.error("Failed to delete PHR file:", err);
+    res.status(500).json({ 
+      error: 'Failed to delete PHR file',
+      details: err.message,
+      message: 'An error occurred while deleting the PHR file. Please try again.'
+    });
+  }
+});
 export default router;
