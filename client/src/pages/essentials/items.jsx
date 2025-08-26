@@ -32,7 +32,7 @@ function Items({ title, image, price, type }) {
   }
 
   return (
-    <div className="card h-100" style={{ padding: "20px" }}>
+    <div className="card h-100 card-ess" style={{ padding: "20px" }}>
       <img src={image} className="card-img" alt={title} />
       <div className="card-body d-flex flex-column">
         <h5 className="card-title">{title}</h5>
